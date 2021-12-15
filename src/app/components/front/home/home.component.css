@@ -1,0 +1,23 @@
+.carousel-inner {
+    height: 400px;
+}
+
+.text-slide-1 {
+    position: absolute;
+    color: rgb(253, 141, 253);
+    font-size: 60px;
+    font-family: "Karla-Medium";
+    top: 50px;
+    left: 20px;
+    width: 52%;
+}
+
+.text-slide-2 {
+    position: absolute;
+    color: rgb(253, 141, 253);
+    font-size: 60px;
+    font-family: "Karla-Medium";
+    top: 100px;
+    right: 20px;
+    width: 52%;
+}

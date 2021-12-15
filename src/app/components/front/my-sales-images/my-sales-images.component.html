@@ -1,0 +1,59 @@
+<div class="loader-g" *ngIf="loading || sending">
+    <div class="lds-ripple">
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12">
+            <p class="float-right">Mis Ventas / Galería de fotos </p>
+            <h4>Mis Ventas / Galería de fotos </h4>
+        </div>
+    </div>
+
+    <div class="card bg-dark2">
+        <div class="card-body">
+
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/mis-ventas/videos" routerLinkActive="active" href="#">Videos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/mis-ventas/galeria-de-fotos" routerLinkActive="active">Galería de fotos</a>
+                </li>
+            </ul>
+
+            <div class="mt-3">
+                <div class="row">
+                    <div class="col-12">
+                        <button type="button" class="btn btn-primary float-right" routerLink="/mis-ventas/galeria-de-fotos/agregar-galeria">  Agregar galería de fotos </button>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-xl-3 col-lg-4 mb-2" *ngFor="let gallery of galleries">
+                        <div class="card text-left" style="height: 100%;">
+                            <div class="card-header bg-white">
+                                <h6 class="text-dark m-0 text-center">{{gallery?.nombre}}</h6>
+                            </div>
+                            <div class="card-body py-2">
+                                <div class="row">
+                                    <div class="col-6 my-1 px-1" *ngFor="let img of gallery.images.slice(0,4)">
+                                        <img class="img-mini-gallery" src="{{img.url_path}}" alt="">
+                                    </div>
+
+                                </div>
+                                <div style="width: 100%;height: 100%;display: flex;justify-content: center;align-items: center;" *ngIf="gallery.images.length == 0 ">
+                                    <p class="text-center m-auto">Esta galería no contiene imagenes</p>
+                                </div>
+                            </div>
+                            <div class="card-footer p-1 bg-white">
+                                <button routerLink="/mis-ventas/galeria-de-fotos/editar-galeria/{{gallery.id}}" type="button" class="btn btn-primary btn-sm mr-1 mb-1 float-right"> <i class="fas fa-pencil-alt"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,157 @@
+<div class="container-navbars">
+    <div class="navbar">
+        <div class="container-nav">
+            <div class="section-logo" routerLink="/">
+                <img class="logo cursor" src="assets\img\default\logos\onlyfetixx-logo.jpg" alt="">
+            </div>
+            <div class="zone-user">
+                <span *ngIf="!userAuth?.token" class="tab" (click)="showModalRegister()">Registrarse</span>
+                <span *ngIf=" !userAuth?.token " class="tab " (click)="showModalLogin() ">Ingresar</span>
+
+                <div class="dropdown" *ngIf="userAuth?.token ">
+                    <span class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                 <i class="fas fa-user"></i> {{userAuth.alias}}
+              </span>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" routerLink="/mi-cuenta">Mi cuenta</a>
+                        <a class="dropdown-item" routerLink="/mis-compras/imagenes">Mis compras</a>
+                        <a class="dropdown-item" routerLink="/mis-ventas/videos">Mis ventas</a>
+
+                        <a (click)="logout() " class="dropdown-item " href="# ">  Cerrar sesión</a>
+                    </div>
+                </div>
+            </div>
+            <div class="tabs ">
+                <span class="tab" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inicio</span>
+                <span class="tab" routerLink="/videos" routerLinkActive="active">Videos</span>
+                <span class="tab" routerLink="/galeria-de-fotos" routerLinkActive="active">Fotos</span>
+
+                <span class="tab ">Ranking</span>
+            </div>
+        </div>
+    </div>
+    <div class="container-nav">
+        <div class="navbar2">
+            <div class="row">
+                <div class="col-4">
+                    <span class="tab" routerLink="/mis-ventas/videos">Publica tus videos</span>
+                </div>
+
+                <div class="col-4">
+                    <form [formGroup]="formS" *ngIf="formS" (ngSubmit)="search()">
+                        <div class="input-group input-group-search" style="max-width: 350px;margin: auto;">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-white dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{typeSearch}}</button>
+
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" (click)="typeSearch = 'VIDEOS'">VIDEOS</a>
+                                    <a class="dropdown-item" (click)="typeSearch = 'FOTOS'">FOTOS</a>
+                                </div>
+                            </div>
+                            <input formControlName="search" type="text" class="form-control" aria-label="">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-primary"> <i class="fas fa-search"></i> </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-4">
+                    <span class="tab" routerLink="/mis-ventas/galeria-de-fotos">Publica tus imágenes</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="margin-navbar ">
+
+</div>
+<!-- MODAL Login -->
+<ng-template #modalLogin let-c="close " let-d="dismiss ">
+    <div class="modal-header">
+        <h4 class="modal-title text-white " id="modal-basic-title "> <i class="fas fa-sign-out-alt "></i> Iniciar Sesión</h4>
+        <button type="button " class="close " (click)="d( 'Cross click') "><span >×</span></button>
+    </div>
+    <form [formGroup]="form" *ngIf="form" (ngSubmit)="login()">
+        <div class="modal-body">
+            <div class="form-group ">
+
+                <p *ngIf="accountConfirm == 'confirmed'" class="text-center text-fucsia" style="line-height: 1.2;"> <i class="fas fa-info-circle"></i> Su cuenta ha sido confirmada con éxito, ingrese sus credenciales para continuar.</p>
+
+                <label for=" ">Alias / Correo</label>
+                <input ngbAutofocus formControlName="usuarioOcorreo" type="text " class="form-control ">
+                <label *ngIf="validate('usuarioOcorreo').valid " class="text-danger "> {{validate('usuarioOcorreo').error }} </label>
+            </div>
+            <div class="form-group ">
+                <label for=" ">Contraseña </label>
+                <input type="password" formControlName="clave" class="form-control ">
+                <label *ngIf="validate( 'clave').valid " class="text-danger "> {{validate('clave').error }} </label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a type="button" class="btn btn-white " (click)="d( 'cancel') "><i class="fas fa-times "></i> Cancelar</a>
+            <button type="submit" class="btn btn-primary "> <i class="fas fa-check "></i> Iniciar</button>
+
+            <p class="mr-auto mt-3">¿No tienes cuenta? <a class="link" (click)="hideMLShowMR()">Regístrate</a> </p>
+        </div>
+    </form>
+</ng-template>
+<!-- MODAL Login -->
+<ng-template #modalRegister let-c="close " let-d="dismiss ">
+    <div class="modal-header">
+        <h4 class="modal-title text-white  " id="modal-basic-title "> Crear cuenta</h4>
+        <button type="button " class="close " (click)="d( 'Cross click') "><span >×</span></button>
+    </div>
+    <form [formGroup]="formR" *ngIf="formR" (ngSubmit)="register()">
+        <div class="modal-body">
+            <div class="row">
+                <div class="form-group col-6">
+                    <label for="">Alias </label>
+                    <input ngbAutofocus formControlName="alias" type="text " class="form-control" maxlength="20">
+                    <label *ngIf="validateR('alias').valid " class="text-danger "> {{validateR('alias').error }} </label>
+                </div>
+                <div class="form-group col-6">
+                    <label for=" ">Correo </label>
+                    <input ngbAutofocus formControlName="correo" type="email " class="form-control " maxlength="30">
+                    <label *ngIf="validateR('correo').valid " class="text-danger "> {{validateR('correo').error }} </label>
+                </div>
+                <div class="form-group col-6">
+                    <label for="">Nombres </label>
+                    <input ngbAutofocus formControlName="nombres" type="text " class="form-control" maxlength="15">
+                    <label *ngIf="validateR('nombres').valid " class="text-danger "> {{validateR('nombres').error }} </label>
+                </div>
+                <div class="form-group col-6">
+                    <label for="">Apellidos </label>
+                    <input ngbAutofocus formControlName="apellidos" type="text " class="form-control" maxlength="15">
+                    <label *ngIf="validateR('apellidos').valid " class="text-danger "> {{validateR('apellidos').error }} </label>
+                </div>
+                <div class="form-group col-6">
+                    <label for=" ">Contraseña</label>
+                    <input type="password" formControlName="clave" class="form-control" maxlength="30">
+                    <label *ngIf="validateR( 'clave').valid " class="text-danger "> {{validateR('clave').error }} </label>
+                </div>
+                <div class="form-group col-6">
+                    <label for=" ">Confirmar Contraseña</label>
+                    <input type="password" formControlName="confirmar_clave" class="form-control" maxlength="30">
+                    <label *ngIf="validateR( 'confirmar_clave').valid " class="text-danger "> {{validateR('confirmar_clave').error }} </label>
+                    <label class="text-danger" *ngIf="formR.errors?.PasswordsNotEqual">
+                      Las contraseñas deben coincidir.
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a type="button" class="btn btn-white " (click)="d( 'cancel') "><i class="fas fa-times "></i> Cancelar</a>
+            <button type="submit" class="btn btn-primary  "> <i class="fas fa-check "></i> Continuar</button>
+            <p style="width: 100%;" class="mr-auto mt-3">¿Ya estás registrado? <a class="link" (click)="hideMRShowML()">Ingresa</a> </p>
+        </div>
+    </form>
+</ng-template>
+
+
+<div class="loader-g " *ngIf="sending ">
+    <div class="lds-ripple ">
+        <div></div>
+        <div></div>
+    </div>
+</div>

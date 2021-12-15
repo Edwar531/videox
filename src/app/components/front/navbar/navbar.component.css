@@ -1,0 +1,118 @@
+.container-navbars {
+    z-index: 20;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(rgba(112, 0, 112, 0.932), rgba(68, 0, 68, 0.877));
+    border-bottom: 2px rgba(255, 255, 255, 0.397) solid;
+}
+
+.navbar {
+    height: 55px;
+    z-index: 18;
+    width: 100%;
+    padding: 0;
+}
+
+.margin-navbar {
+    height: 95px;
+}
+
+.container-nav {
+    width: 90%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.navbar .section-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: left;
+    height: 100%;
+}
+
+.text-user-nav {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-family: 'Karla-Medium';
+}
+
+.navbar .logo {
+    width: 170px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border: solid 2px rgba(255, 255, 255, 0.397);
+    margin-top: 1px;
+}
+
+.container-navbars .tabs {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-navbars .tab {
+    font-size: 20px;
+    margin: 5px 15px 5px 15px;
+    color: rgb(196, 194, 194);
+    font-family: "Karla-Medium";
+}
+
+.container-navbars .tab:hover {
+    color: fuchsia;
+    cursor: pointer;
+}
+
+.container-nav .tab {}
+
+.container-nav .tab.active {
+    color: white;
+}
+
+.zone-user {
+    color: white;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 170px;
+}
+
+.zone-user .tab {
+    font-size: 16px;
+    margin: 5px 8px 5px 8px;
+}
+
+.navbar2 {
+    /* position: fixed; */
+    /* top: 55px; */
+    margin-top: -5px;
+    height: 40px;
+    z-index: 18;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.container-navbars .navbar2 .tab {
+    font-size: 16px !important;
+}
+
+.container-navbars .navbar2 .col-4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-group-search .form-control {
+    height: 35px !important;
+}
+
+.input-group-search .btn {
+    height: 35px !important;
+}

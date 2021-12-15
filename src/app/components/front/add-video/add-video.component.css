@@ -1,0 +1,57 @@
+.pasos {
+    padding: 20px 0 20px 0;
+}
+
+.pasos .circle {
+    background: var(--f-l);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    border: 4px white solid;
+    /* padding-top: 8px; */
+    margin-right: 20px;
+    font-size: 25px;
+    font-family: 'Karla-Medium';
+    color: var(--f);
+    text-shadow: 1px 1px 1px grey;
+}
+
+.pasos .circle.active {
+    background: var(--f);
+    color: white;
+}
+
+.upload-drop {
+    border: 2px dotted white;
+    padding: 10px !important;
+    background: grey;
+    color: white;
+    font-size: 16px;
+    text-shadow: 1px 1px 1px black;
+    margin: auto2;
+}
+
+.upload-drop:hover {
+    background: rgb(158, 157, 157);
+    cursor: pointer;
+}
+
+.uploaded-video {
+    max-width: 800px;
+    margin: auto;
+}
+
+.uploaded-video img {
+    width: 100%;
+    margin: auto;
+    max-width: 400px;
+    max-height: 280px;
+    object-fit: cover;
+}
+
+.uploaded-video img {
+    border: solid 4px rgb(216, 216, 216);
+}

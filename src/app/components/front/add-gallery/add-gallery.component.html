@@ -1,0 +1,88 @@
+<div class="loader-g" *ngIf="loading || sending">
+    <div class="lds-ripple">
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<div class="container mt-5 relative">
+    <div class="CardProgressUpload p-0 card bg-dark2" *ngIf="cardUploads">
+        <div class="card-header">
+            <h3 class="mt-0 text-fucsia">Subida de archivos</h3>
+        </div>
+
+        <div class="card-body p-0">
+            <table class="table m-0" style="font-size:14px">
+                <tr>
+                    <th class="text-center text-white">Archivo</th>
+                    <th class="text-center text-white">Progreso</th>
+                </tr>
+                <tr *ngFor="let progress of progressInfos">
+                    <td style="width: 100px" class="px-2">
+                        <div class="text-white" style="white-space: nowrap; text-overflow: ellipsis;overflow: hidden;width: 100px;">
+                            {{progress.name}}
+                        </div>
+                    </td>
+                    <td class="text-center pt-0 px-1">
+                        <p [ngClass]="{'text-danger':progress.error.length != 0}" class="m-0">{{progress.percentage}} %</p>
+                        <div class="progress " style="height: 12px;">
+                            <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{ progress.percentage }}" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{ width: progress.percentage + '%' }">
+                            </div>
+                        </div>
+                        <label *ngIf="progress.error.length != 0" class="text-danger">{{progress.error}}</label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="card-footer p-2">
+            <button (click)="cardUploads = false" type="button" class="btn btn-primary float-right"> Aceptar</button>
+        </div>
+    </div>
+
+    <p class="float-right">Mis Ventas / Galería de fotos / Agregar galería </p>
+    <h3>Agregar galería</h3>
+    <div class="card bg-dark2">
+        <form [formGroup]="form" *ngIf="form" (ngSubmit)="addUpdateGallery()">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-4">
+                        <label for="">Nombre de la galería</label>
+                        <input type="" class="form-control" formControlName="nombre">
+                        <label *ngIf="validate('nombre').valid " class="text-danger "> {{validate('nombre').error }} </label>
+                    </div>
+                    <div class="col-4">
+                        <label for="">Estatus</label>
+                        <select class="form-control" formControlName="estatus">
+                      <option value="publicado">Publicada</option>
+                      <option value="no-publicado">No Publicada</option>
+                    </select>
+                        <label *ngIf="validate('estatus').valid " class="text-danger "> {{validate('estatus').error }} </label>
+                    </div>
+                </div>
+                <br>
+                <!-- <hr> -->
+                <h5>Imágenes</h5>
+                <div style="border:solid 1px grey;background: #1d1e1f;" class="p-3">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-xl-3 col-lg-4 text-white mb-4" *ngFor="let image of images">
+                                    <img class="img-edit-gallery" src="{{image.url_path}}" alt="">
+                                </div>
+
+                                <div class="col-12">
+                                    <label class="btn btn-primary px-2 py-1 btn-file mt-2 float-right">
+                                    <i class="fas fa-upload"></i> Agregar Imágenes
+                                     <input class="hide" (change)="selectFiles($event)" multiple   type="file"/>
+                                  </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary float-right my-3 ml-2">Guardar</button>
+                <button routerLink="/mis-ventas/galeria-de-fotos" type="button" class="btn btn-white float-right my-3">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,429 @@
+/* You can add global styles to this file, and also import other style files */
+
+:root {
+    --f-l: rgb(255, 223, 255);
+    --f: rgb(255, 151, 255);
+    --f-b: rgb(235, 8, 235);
+}
+
+.cursor:hover {
+    cursor: pointer;
+}
+
+.hide {
+    display: none;
+}
+
+.relative {
+    position: relative;
+}
+
+.container2 {
+    width: 80%;
+    margin: auto;
+    max-width: 1400px;
+}
+
+@font-face {
+    font-family: 'Karla-Medium';
+    src: url(src\assets\fonts\static\Karla-Medium.ttf);
+}
+
+@font-face {
+    font-family: 'OpenSans';
+    src: url(src\assets\fonts\Open_Sans\OpenSans-VariableFont_wdth,wght.ttf);
+}
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.form-control:focus,
+.uneditable-input:focus {
+    /* border-color: white !important; */
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(255, 255, 255, 0.705) !important;
+    outline: 0 none !important;
+}
+
+.karla {
+    font-family: "Karla-Medium";
+}
+
+.relative {
+    position: relative;
+}
+
+.text-fucsia {
+    color: rgb(255, 151, 255);
+}
+
+.text-fucsia-b {
+    color: rgb(235, 8, 235);
+}
+
+.img-sm {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+
+/* text */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+small,
+label {
+    color: rgb(211, 208, 208);
+    font-family: 'Karla-Medium';
+}
+
+p {
+    color: rgb(211, 208, 208);
+    font-family: 'OpenSans';
+}
+
+.nav-tabs .nav-link {
+    font-family: 'Karla-Medium';
+    color: rgb(211, 208, 208) !important;
+}
+
+.nav-tabs .nav-link.active {
+    color: #1d1e1f !important;
+}
+
+.font-600 {
+    font-weight: 600;
+}
+
+.link {
+    color: fuchsia;
+}
+
+.link:hover {
+    color: rgb(226, 51, 226);
+    cursor: pointer;
+}
+
+label {
+    margin: 2px 0 2px 0 !important;
+    padding: 0 !important;
+    color: rgb(255, 223, 255);
+}
+
+label.text-danger {
+    font-size: 12px;
+}
+
+hr {
+    margin: 20px 0 20px 0 !important;
+    background: rgb(207, 207, 207);
+}
+
+.dropdown-menu {
+    padding: 0 !important;
+    font-family: 'Karla-Medium';
+}
+
+.dropdown-item {
+    padding: 6px 12px 6px 12px !important;
+    font-family: 'Karla-Medium';
+    color: var(--f-b) !important;
+}
+
+
+/* cards */
+
+.close {
+    color: white !important;
+}
+
+.modal-content {
+    background: #292A2B !important;
+    /* box-shadow: 2px 2px 3px rgba(165, 164, 164, 0.548), -2px -2px 4px rgba(165, 164, 164, 0.548); */
+    border-color: rgb(82, 81, 81) !important;
+}
+
+.modal-content .modal-footer {
+    border-color: rgb(82, 81, 81) !important;
+    background: rgb(58, 58, 58);
+}
+
+.modal-content .modal-header {
+    border-color: rgb(100, 100, 100) !important;
+    background: rgb(58, 58, 58);
+}
+
+
+/* card models */
+
+.bg-dark2 {
+    background: #292A2B !important;
+}
+
+.card-model {
+    padding: 0 !important;
+    border-radius: 0 !important;
+    border: solid 1px rgb(207, 207, 207) !important;
+    margin-bottom: 30px;
+}
+
+.card-model .card-body {
+    padding: 0;
+    width: 100%;
+    height: 450px;
+    overflow: hidden;
+}
+
+.card-model .card-body img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-model .card-footer {
+    background: rgb(202, 202, 202);
+}
+
+
+/* Botones */
+
+.btn {
+    font-family: 'Karla-Medium';
+}
+
+.btn-white {
+    border: solid 1px rgb(207, 207, 207) !important;
+    background: white !important;
+}
+
+.btn-primary {
+    background: rgb(255, 36, 255) !important;
+    border: solid 1px rgb(255, 36, 255) !important;
+}
+
+.btn-outline-primary {
+    border: solid 1px var(--f) !important;
+    color: var(--f) !important;
+}
+
+
+/* .btn-f-l {
+    background: var(--f) !important;
+    color: white !important;
+} */
+
+
+/* INPUTS */
+
+.form-control {
+    background: #1d1e1f !important;
+    border: 2px solid rgb(112, 112, 112) !important;
+    font-family: 'Karla-Medium' !important;
+    font-size: 18px !important;
+    color: rgb(207, 207, 207) !important;
+}
+
+
+/* LOADER GLOBAL */
+
+.loader-g {
+    position: fixed;
+    z-index: 99999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.452);
+}
+
+
+/* loader-icon */
+
+.lds-ripple {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+
+.lds-ripple div {
+    position: absolute;
+    border: 4px solid fuchsia;
+    opacity: 1;
+    border-radius: 50%;
+    animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+    z-index: 1999;
+}
+
+.lds-ripple div:nth-child(2) {
+    animation-delay: -0.5s;
+}
+
+@keyframes lds-ripple {
+    0% {
+        top: 36px;
+        left: 36px;
+        width: 0;
+        height: 0;
+        opacity: 1;
+    }
+    100% {
+        top: 0px;
+        left: 0px;
+        width: 72px;
+        height: 72px;
+        opacity: 0;
+    }
+}
+
+.toast-container .ngx-toastr {
+    /* padding: 10px 14px 10px 50px !important; */
+    line-height: 1.2 !important;
+    opacity: 0.8;
+}
+
+.toast-top-center {
+    top: 100px !important;
+    right: 0;
+    width: 100%;
+}
+
+label.text-danger {
+    line-height: 1;
+}
+
+
+/* iamges */
+
+.img-circle {
+    border-radius: 5%;
+}
+
+
+/* card videos */
+
+.cardVideo {
+    border-radius: 0 !important;
+    height: 100%;
+}
+
+.cardVideo .card-header {
+    position: relative;
+    padding: 0 !important;
+    height: 170px;
+}
+
+.cardVideo .card-body {
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    padding: 5px 15px 5px 15px;
+    background: rgb(32, 32, 32);
+    border-color: white !important
+}
+
+.cardVideo .card-footer {
+    background: rgb(32, 32, 32);
+}
+
+.cardVideo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.container-icon-play {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-icon-play .icon-play {
+    color: white;
+    font-size: 50px;
+    opacity: 0.7;
+    text-shadow: 2px 2px 2px rgb(94, 92, 92), -1px -1px 2px rgb(94, 92, 92);
+    display: none;
+    transition-duration: 2s;
+    /* background: var(--f);
+    border-radius: 100%;
+    padding: 20px 20px 20px 25px; */
+}
+
+.container-icon-play:hover {
+    cursor: pointer;
+}
+
+.container-icon-play:hover>.icon-play {
+    display: block;
+}
+
+
+/* SIDEBAR */
+
+.sidebar {
+    padding: 20px;
+    background: rgb(39, 39, 39);
+    width: 230px;
+    float: left;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+.sidebar .tags .tag {
+    margin: 0 4px 4px 0;
+    padding: 4px;
+    border: var(--f) solid 1px;
+    color: var(--f);
+}
+
+
+/* DROPDOWN TAGS */
+
+.selected-item-container {
+    margin-bottom: 2px;
+}
+
+
+/* galleries */
+
+.cardGallerie {
+    background: rgb(32, 32, 32) !important;
+    border-color: white !important
+}
+
+.cardGallerie .card-header {
+    border-color: white !important
+}
+
+.img-mini-gallery {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border: 1px rgb(184, 184, 184) solid;
+    border-radius: 5px;
+}

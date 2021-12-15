@@ -1,0 +1,53 @@
+<div class="loader-g" *ngIf="loading">
+    <div class="lds-ripple">
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<div class="animate fadeIn">
+
+
+    <div class="container2 mt-3">
+        <div class="sidebar">
+            <h5>Etiquetas fotos</h5>
+            <div class="tags">
+
+            </div>
+        </div>
+
+        <div class="content" style="overflow: auto">
+            <h2 class="mb-2 text-fucsia">Galerías de fotos</h2>
+            <p *ngIf="search" class=""><strong>Búsqueda:</strong> {{search}}</p>
+            <div class="row" style="width: 100%;">
+                <div class="col-xl-4 col-lg-4 mb-2" *ngFor="let gallery of galleries">
+                    <div class="card text-left cardGallerie" style="height: 100%;">
+                        <div class="card-header">
+                            <h5 class=" m-0 text-center">{{gallery?.nombre}}</h5>
+                        </div>
+                        <div class="card-body py-2">
+                            <div class="row">
+                                <div class="col-6 my-1 px-1" *ngFor="let img of gallery.images.slice(0,4)">
+                                    <img class="img-mini-gallery" src="{{img.url_path}}" alt="">
+                                </div>
+
+                            </div>
+                            <div style="width: 100%;height: 100%;display: flex;justify-content: center;align-items: center;" *ngIf="gallery.images.length == 0 ">
+                                <p class="text-center m-auto">Esta galería no contiene imagenes</p>
+                            </div>
+                        </div>
+                        <!-- <div class="card-footer p-1 bg-white">
+                      <button routerLink="/mis-ventas/galeria-de-fotos/editar-galeria/{{gallery.id}}" type="button" class="btn btn-primary btn-sm mr-1 mb-1 float-right"> <i class="fas fa-pencil-alt"></i> </button>
+                  </div> -->
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="galleries && galleries.length == 0">
+                <h4 class=" my-4 "> <i class="fas fa-info-circle "></i> No se ecnontraron resultados. </h4>
+            </div>
+        </div>
+        <br>
+        <br>
+
+    </div>
+
+</div>

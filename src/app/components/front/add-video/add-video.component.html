@@ -1,0 +1,140 @@
+<div class="loader-g" *ngIf="loading || sending || uploading_video">
+    <div class="lds-ripple">
+        <div></div>
+        <div></div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <p *ngIf="!idEdit" class="float-right">Mis Ventas / Videos <span>/ Agregar Video</span> </p>
+    <p *ngIf="idEdit" class="float-right">Mis Ventas / Videos <span>/ Editar Video</span> </p>
+
+    <h2 *ngIf="!idEdit">Subir Video</h2>
+    <h2 *ngIf="idEdit">Editar Video</h2>
+
+
+    <div class="card bg-dark2">
+        <div class="card-header bg-dark" *ngIf="!idEdit">
+            <h6 class="m-0">Siga los siguientes pasos:</h6>
+            <div class="pasos form-inline">
+                <div class="circle" [ngClass]="{'active':step == 1}">
+                    <div>1</div>
+                </div>
+                <div class="circle" [ngClass]="{'active':step == 2}">
+                    <div>2</div>
+                </div>
+                <!-- <div class="circle" [ngClass]="{'active':step == 3}">
+                    <div>3</div>
+                </div> -->
+            </div>
+        </div>
+        <div class="card-header bg-dark p-2" style="padding-bottom:0 !important ;" *ngIf="idEdit">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" [ngClass]="{'active':step == 1}" (click)="step = 1">Información</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [ngClass]="{'active':step == 2}" (click)="step = 2">Video</a>
+                </li>
+
+            </ul>
+        </div>
+        <!-- step 1 -->
+        <form [formGroup]="form" *ngIf="form" (ngSubmit)="saveInfo()" [ngClass]="{hide: step != 1}">
+            <div class="card-body">
+                <h5 class="text-fucsia mb-4" *ngIf="!idEdit">Agregue la información del video:</h5>
+
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="">Nombre del video</label>
+                            <input type="text" class="form-control" formControlName="nombre" maxlength="100">
+                            <label *ngIf="validate('nombre').valid " class="text-danger "> {{validate('nombre').error }} </label>
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="form-group">
+                            <label for="">Etiquetas</label>
+                            <!-- <input type="text" class="form-control" formControlName="nombre" maxlength="100"> -->
+                            <ng-multiselect-dropdown formControlName="etiquetas" [settings]="dropdownSettings" [data]="dropdownList" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                            </ng-multiselect-dropdown>
+                            <label *ngIf="validate('etiquetas').valid " class="text-danger "> {{validate('etiquetas').error }} </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="">Descripción</label>
+                    <textarea class="form-control" name="" id="" cols="40" rows="4" formControlName="descripcion" maxlength="600"></textarea>
+                    <label *ngIf="validate('descripcion').valid " class="text-danger "> {{validate('descripcion').error }} </label>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-12">
+                        <button *ngIf="!idEdit" type="submit" class="btn btn-primary float-right ml-2 ">Siguiente <i class="fas fa-arrow-right "></i>  </button>
+                        <button *ngIf="idEdit" type="submit" class="btn btn-primary float-right ml-2 "> <i class="fas fa-save"></i> Guardar cambios </button>
+
+                        <button *ngIf="!idEdit" (click)="back()" type="button" class="btn btn-white float-right "><i class="fas fa-times-circle "></i> Cancelar   </button>
+                        <button *ngIf="idEdit" (click)="back()" type="button" class="btn btn-white float-right "><i class="fas fa-backward "></i> Videos   </button>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- step 2 -->
+        <div class="card-body" [ngClass]="{hide: step != 2}">
+            <h5 class="text-fucsia mb-4" *ngIf="!idEdit">Seleccione el video a publicar.</h5>
+
+            <div class="text-center">
+
+                <div class="uploaded-video" *ngIf="uploaded_video">
+                    <img src="{{vista_previa_64}}" alt="">
+                    <!-- <img src="assets\img\default\banner\32493464-silueta-de-una-mujer-desnuda-que-cubre-su-pecho-esquema-de-un-tamaño-más-mujer-desnuda-sobre-fondo-n.jpg" alt=""> -->
+                    <p *ngIf="!idEdit" class="mt-2">Video: {{fileName}}</p>
+                    <!-- <p *ngIf="idEdit" class="mt-2 mb-5">Video: {{video.nombre}}</p> -->
+
+                </div>
+
+                <label class="upload-drop mt-4" *ngIf="!uploading_video">
+                <i class="fas fa-upload "></i>
+               <span *ngIf="!uploaded_video"> Haga clic aquí o arrastre el video a esta zona.</span>
+               <span *ngIf="uploaded_video"> <span class="text-fucsia"> Para cambiar video</span> haga clic aquí o arrastre el nuevo video a esta zona.</span>
+
+                <input class="hide" (change)="selectFile($event)" type="file"/>
+              </label>
+            </div>
+
+            <div *ngIf="uploading_video">
+                <p class="m-0"> <span class="font-600">Subiendo vista previa del video</span></p>
+                <h5 class="text-center m-0">{{progressT}} %</h5>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [ngStyle]="{ width: progressT + '%' }" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <br>
+                <p class="m-0"> <span class="font-600">Subiendo video:</span> {{fileName}}</p>
+                <h5 class="text-center m-0">{{progress}} %</h5>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [ngStyle]="{ width: progress + '%' }" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer" [ngClass]="{hide: step != 2}">
+            <button *ngIf="!idEdit" (click)="save_update_video()" [disabled]="!uploaded_video" type="button" class="btn btn-primary float-right ml-2 ">Publicar <i class="fas fa-arrow-right "></i>  </button>
+            <button *ngIf="!idEdit" (click)="step = 1" type="button" class="btn btn-white float-right "><i class="fas fa-arrow-left "></i> Anterior </button>
+            <button *ngIf="idEdit" (click)="back()" type="button" class="btn btn-white float-right "><i class="fas fa-backward "></i> Videos </button>
+
+        </div>
+    </div>
+
+    <!-- <label class="btn btn-primary px-2 py-1 btn-file mt-2 ">
+      <i class="fas fa-upload "></i> Seleccionar Video
+      <input class="hide " (change)="selectFile($event) " multiple   type="file "/>
+    </label> -->
+
+    <!--
+    <br>
+    <br>
+    <h1>Video</h1>
+
+    <button (click)="getListObjects() ">get list</button> -->
+</div>

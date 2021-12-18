@@ -60,8 +60,7 @@ export class AuthInterceptorService implements HttpInterceptor {
           this.toastr.warning("Su sesión ha expirado.");
           this.authService.logout();
         }else{
-          this.toastr.warning("Error. no se puedo conectar al servidor, verifique su conexión a internet.");
-
+          this.toastr.warning("Error. No se pudo conectar al servidor, verifique su conexión a internet.");
         }
         return throwError(err);
       })

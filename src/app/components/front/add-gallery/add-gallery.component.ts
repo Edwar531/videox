@@ -124,9 +124,6 @@ export class AddGalleryComponent implements OnInit {
   }
 
   // inicio de sesion
-
-
-
   validate(name: string) {
     let campo: any = this.form.get(name);
     if (campo) {
@@ -156,7 +153,7 @@ export class AddGalleryComponent implements OnInit {
     this.sending = true;
     this.cardUploads = true;
     console.log(file.name);
-    let regex = new RegExp("(.*?)\.(jpg|png|jpeg)$"); //add or remove required extensions here
+    let regex = new RegExp("(.*?)\.(jpeg|png|jpg|gif|svg|webp)$"); //add or remove required extensions here
     let regexTest = regex.test(file.name);
     // verficar q sea csv
     if (!regexTest) {

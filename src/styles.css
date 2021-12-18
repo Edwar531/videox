@@ -64,6 +64,10 @@ input[type="color"]:focus,
     position: relative;
 }
 
+.text-fucsia-l {
+    color: rgb(247, 210, 247);
+}
+
 .text-fucsia {
     color: rgb(255, 151, 255);
 }
@@ -123,7 +127,7 @@ p {
 label {
     margin: 2px 0 2px 0 !important;
     padding: 0 !important;
-    color: rgb(255, 223, 255);
+    color: rgb(247, 210, 247);
 }
 
 label.text-danger {
@@ -172,6 +176,26 @@ hr {
 
 /* card models */
 
+.card {
+    background: #292A2B !important;
+    border: solid 1px #444444 !important;
+}
+
+.card .card-header {
+    background: #444444 !important;
+}
+
+
+/* .card .card-body {} */
+
+.card .card-footer {
+    background: #444444 !important;
+}
+
+.bg-dark-l {
+    background: #444444 !important;
+}
+
 .bg-dark2 {
     background: #292A2B !important;
 }
@@ -202,6 +226,13 @@ hr {
 
 
 /* Botones */
+
+.btn.btn-xs {
+    padding: .25rem .4rem !important;
+    font-size: .875rem !important;
+    line-height: .5 !important;
+    border-radius: .2rem !important;
+}
 
 .btn {
     font-family: 'Karla-Medium';
@@ -313,10 +344,6 @@ label.text-danger {
 
 
 /* iamges */
-
-.img-circle {
-    border-radius: 5%;
-}
 
 
 /* card videos */

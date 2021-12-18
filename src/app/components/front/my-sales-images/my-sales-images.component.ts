@@ -26,8 +26,6 @@ export class MySalesImagesComponent implements OnInit {
 
   getGalleries(){
     this.galleryS.galleriesUser(this.userAuth.id).subscribe((data:any)=>{
-      console.log(data);
-
       this.galleries = data;
       this.loading = false;
     })

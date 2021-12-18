@@ -29,6 +29,10 @@ export class ValidationsMessagePipe implements PipeTransform {
       return 'La dirección de correo es invalida.';
     } else if (error?.urlyoutube) {
       return 'La dirección url de Youtube es incorrecta.';
+    } else if (error?.whitespace) {
+      return 'Este campo no debe incluir espacios.';
+    } else if (error?.only_letters_numbers_underscore) {
+      return 'Este campo debe incluir solo letras, números y guion bajo.';
     } else {
       return 'Formato de texto inválido para este campo.';
     }

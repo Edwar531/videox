@@ -1,20 +1,305 @@
-<div class="container mt-5">
+<div class="loader-g" *ngIf="sending">
+    <div class="lds-ripple">
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<div class="container mt-5 animate fadeIn relative" *ngIf="user">
+    <div class="CardProgressUpload p-0 card" *ngIf="cardUpload">
+        <div class="card-header">
+            <h3 class="m-0 text-fucsia">Subida de archivos</h3>
+        </div>
+
+        <div class="card-body p-0">
+            <table class="table m-0" style="font-size:14px">
+                <tr>
+                    <th class="text-center text-white">Archivo</th>
+                    <th class="text-center text-white">Progreso</th>
+                </tr>
+                <tr>
+                    <td style="width: 100px" class="px-2">
+                        <div class="text-white" style="white-space: nowrap; text-overflow: ellipsis;overflow: hidden;width: 100px;">
+                            {{progressInfo.name}}
+                        </div>
+                    </td>
+                    <td class="text-center pt-0 px-1">
+                        <p [ngClass]="{'text-danger':progressInfo.error.length != 0}" class="m-0">{{progressInfo.porcentage}} %</p>
+                        <div [ngClass]="{'bg-danger':progressInfo.error.length != 0}" class="progress " style="height: 12px;">
+                            <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{ progressInfo.porcentage }}" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{ width: progressInfo.porcentage + '%' }">
+                            </div>
+                        </div>
+                        <label *ngIf="progressInfo.error.length != 0" class="text-danger">{{progressInfo.error}}</label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="card-footer p-2">
+            <button (click)="cardUpload = false" type="button" class="btn btn-primary float-right"> Aceptar</button>
+        </div>
+    </div>
 
 
-    <div class="card bg-dark2">
+    <h2>Mi cuenta</h2>
+    <div class="card bg-dark2 mb-5">
+        <div class="card-header bg-dark-l">
+            <h4 class="m-0">Presentación</h4>
+        </div>
         <div class="card-body">
-            <h2>Mi cuenta</h2>
-
-            <div class="row">
-                <div class="col-4">
-                    <img class="img-circle" src="assets/img/default/img-user.jpg" alt="">
+            <div class="form-inline">
+                <div class="text-center mr-4">
+                    <p class="mb-2 text-fucsia-l">Foto de perfil</p>
+                    <div class="container-buttons-img relative">
+                        <button *ngIf="user.imagen_de_perfil" (click)="showModalDeleteImg()" type="button" class="btn btn-white btn-sm btn-delete-img px-2 py-1"> <i class="fas fa-times text-danger"></i> </button>
+                        <div class="container-img-circle"><img *ngIf="user.imagen_de_perfil" class="" [src]="user.imagen_de_perfil" alt="">
+                            <img *ngIf="!user.imagen_de_perfil" class="" src="assets/img/default/user-default.png" alt="">
+                            <div class="btn-change">
+                                <div>
+                                    <label class="btn btn-sm btn-primary px-2 py-1 mt-5"> Cambiar  <input class="hide" (change)="changeImage($event)"  type="file"/>  </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="col-4">
-                    <label>Alias</label>
-                    <input type="text" class="form-control">
+                <div class="row">
+                    <div class="col-12">
+                        <h5 class="m-0 text-fucsia-l" for="" style="text-align: left !important;">Alias:</h5>
+                        <h4 class="m-0">
+                            <span class="text-white" *ngIf="user.alias"> {{user.alias}} </span>
+                            <span class="text-secondary" *ngIf="!user.alias"> No especificado </span>
+                            <button type="button" class="btn btn-primary btn-xs" (click)="showmodal_alias()"> Editar </button>
+                        </h4>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="card bg-dark2 mb-5">
+        <div class="card-header bg-dark-l">
+            <h4 class="m-0">Cuenta</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-4 form-group">
+                    <label>Correo:  </label>
+                    <p class="text-white">
+                        <span class="text-white" *ngIf="user.correo"> {{user.correo}} </span>
+                        <span class="text-secondary" *ngIf="!user.correo"> No especificado </span>
+                        <button type="button" class="btn btn-primary btn-xs" (click)="showModalEmail()"> Editar </button>
+                    </p>
+                </div>
+                <div class="col-4 form-group">
+                    <label>Contraseña:  </label>
+                    <p class="text-white mt-1"> ******** <button type="button" class="btn btn-primary btn-xs"> Editar </button> </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card bg-dark2 mb-5">
+        <div class="card-header bg-dark-l">
+            <h4 class="m-0">Datos personales</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-3 form-group">
+                    <label>Nombres:  </label>
+                    <p class="m-0">
+                        <span class="text-white" *ngIf="user.nombres"> {{user.nombres}} </span>
+                        <span class="text-secondary" *ngIf="!user.nombres"> No especificado </span>
+                    </p>
+                </div>
+                <div class="col-3 form-group">
+                    <label>Apellidos:  </label>
+                    <p class="m-0">
+                        <span class="text-white" *ngIf="user.apellidos"> {{user.apellidos}}</span>
+                        <span class="text-secondary" *ngIf="!user.apellidos"> No especificado </span>
+                    </p>
+                </div>
+                <div class="col-3 form-group">
+                    <label>Fecha de nacimiento:  </label>
+                    <p class="m-0">
+                        <span class="text-white" *ngIf="user.fecha_nacimiento"> {{user.fecha_nacimiento}} </span>
+                        <span class="text-secondary" *ngIf="!user.fecha_nacimiento"> No especificado </span>
+                    </p>
+                </div>
+
+                <div class="col-3 form-group">
+                    <label>Edad:  </label>
+                    <p class="m-0">
+                        <span class="text-white" *ngIf="user.edad"> {{user.edad}} </span>
+                        <span class="text-secondary" *ngIf="!user.edad"> No especificado </span>
+                    </p>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary float-right">Editar</button>
+        </div>
+    </div>
+
+    <div class="card bg-dark2 mb-5">
+        <div class="card-header bg-dark-l">
+            <h4 class="m-0">Documentación</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-3 form-group">
+                    <label>Tipo de documentación:  </label>
+                    <p class="m-0">
+                        <span class="text-white" *ngIf="user.tipo_de_dni"> {{user.tipo_de_dni}} </span>
+                        <span class="text-secondary" *ngIf="!user.tipo_de_dni"> No especificado </span>
+                    </p>
+                </div>
+                <div class="col-3 form-group">
+                    <label>Número de documentación:  </label>
+                    <p class="m-0">
+                        <span class="text-white" *ngIf="user.numero_de_dni"> {{user.numero_de_dni}} </span>
+                        <span class="text-secondary" *ngIf="!user.numero_de_dni"> No especificado </span>
+                    </p>
+                </div>
+                <div class="col-3 form-group">
+                    <label>Nacionalidad:  </label>
+                    <p class="m-0">
+                        <span class="text-white" *ngIf="user.nacionalidad"> {{user.nacionalidad}} </span>
+                        <span class="text-secondary" *ngIf="!user.nacionalidad"> No especificado </span>
+                    </p>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary float-right">Editar</button>
+        </div>
+    </div>
+
+    <div class="card bg-dark2 mb-5">
+        <div class="card-header bg-dark-l">
+            <h4 class="m-0">Contacto</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-3 form-group">
+                    <label>Whatsapp:  </label>
+                    <p class="m-0">
+                        <span class="text-white" *ngIf="user.whatsapp"> {{user.whatsapp}} </span>
+                        <span class="text-secondary" *ngIf="!user.whatsapp"> No especificado </span>
+                    </p>
+                </div>
+                <div class="col-3 form-group">
+                    <label>Teléfono:  </label>
+                    <p class="m-0">
+                        <span class="text-white" *ngIf="user.telefono"> {{user.telefono}} </span>
+                        <span class="text-secondary" *ngIf="!user.telefono"> No especificado </span>
+                    </p>
+                </div>
+                <div class="col-3 form-group">
+                    <label>Pais:  </label>
+                    <p class="m-0">
+                        <span class="text-white" *ngIf="user.pais"> {{user.pais}} </span>
+                        <span class="text-secondary" *ngIf="!user.pais"> No especificado </span>
+                    </p>
+                </div>
+                <div class="col-3 form-group">
+                    <label>Estado / Provincia:  </label>
+                    <p class="m-0">
+                        <span class="text-white" *ngIf="user.estado_provincia"> {{user.estado_provincia}} </span>
+                        <span class="text-secondary" *ngIf="!user.estado_provincia"> No especificado </span>
+                    </p>
+                </div>
+                <div class="col-3 form-group">
+                    <label>Ciudad:  </label>
+                    <p class="m-0">
+                        <span class="text-white" *ngIf="user.ciudad"> {{user.ciudad}} </span>
+                        <span class="text-secondary" *ngIf="!user.ciudad"> No especificado </span>
+                    </p>
+                </div>
+
+                <div class="col-3 form-group">
+                    <label>Municipio:  </label>
+                    <p class="m-0">
+                        <span class="text-white" *ngIf="user.municipio"> {{user.municipio}} </span>
+                        <span class="text-secondary" *ngIf="!user.municipio"> No especificado </span>
+                    </p>
+                </div>
+                <div class="col-12 form-group">
+                    <label>Dirección:  </label>
+                    <p class="m-0">
+                        <span class="text-white" *ngIf="user.direccion"> {{user.direccion}} </span>
+                        <span class="text-secondary" *ngIf="!user.direccion"> No especificado </span>
+                    </p>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary float-right">Editar</button>
+        </div>
+    </div>
 </div>
+
+<!-- MODAL LOGIN -->
+<ng-template #modal_alias let-c="close " let-d="dismiss ">
+    <div class="modal-header">
+        <h4 class="modal-title text-fucsia " id="modal-basic-title "> <i class="fas fa-sign-out-alt "></i> Editar alias</h4>
+        <button type="button " class="close " (click)="d( 'Cross click') "><span >×</span></button>
+    </div>
+    <form [formGroup]="formAlias" *ngIf="formAlias" (ngSubmit)="saveAlias()">
+        <div class="modal-body">
+            <div class="form-group ">
+                <label for=" ">Alias</label>
+                <input ngbAutofocus formControlName="alias" type="text " class="form-control " maxlength="30">
+                <label *ngIf="validateFormAlias('alias').valid " class="text-danger"> {{validateFormAlias('alias').error }} </label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a type="button" class="btn btn-white " (click)="c('cancel') "><i class="fas fa-times "></i> Cancelar</a>
+            <button type="submit" class="btn btn-primary "> <i class="fas fa-check "></i> Guardar</button>
+        </div>
+    </form>
+</ng-template>
+
+<!-- MODAL DELETE -->
+<ng-template #modal_delete_img let-c="close " let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title text-fucsia " id="modal-basic-title "> <i class="fas fa-sign-out-alt "></i> Eliminar foto</h4>
+        <button type="button " class="close " (click)="d( 'Cross click') "><span >×</span></button>
+    </div>
+
+    <div class="modal-body">
+        <h5 class="text-danger my-2"> ¿Está seguro de borrar su foto de perfil? </h5>
+    </div>
+    <div class="modal-footer">
+        <a type="button" class="btn btn-white " (click)="c('cancel') "><i class="fas fa-times "></i> Cancelar</a>
+        <button (click)="delete_img()" type="submit" class="btn btn-danger "> <i class="fas fa-check "></i> Borrar</button>
+    </div>
+</ng-template>
+
+
+<!-- MODAL EMAIL -->
+<ng-template #modal_email let-c="close " let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title text-fucsia " id="modal-basic-title "> <i class="fas fa-sign-out-alt "></i> Cambio de correo</h4>
+        <button type="button " class="close " (click)="d( 'Cross click') "><span >×</span></button>
+    </div>
+    <!-- <div class="modal-body">
+        <p class=" my-2"> Al presionar <span class="text-fucsia-l">"Aceptar"</span> se enviará un código a su correo actual, utilice este código para completar el cambio de correo. </p>
+    </div>
+    <div class="modal-footer">
+        <a type="button" class="btn btn-white " (click)="c('cancel') "><i class="fas fa-times "></i> Cancelar</a>
+        <button (click)="delete_img()" type="submit" class="btn btn-primary "> <i class="fas fa-check "></i> Aceptar</button>
+    </div> -->
+    <form [formGroup]="form_email" *ngIf="form_email" (ngSubmit)="change_email()">
+        <div class="modal-body">
+            <p class="text-justify"></p>
+            <div class="form-group ">
+                <label for=" ">Tu contraseña:</label>
+                <input ngbAutofocus formControlName="contraseña" type="password" class="form-control " maxlength="60">
+                <label *ngIf="validateForms('contraseña',form_email).valid " class="text-danger"> {{validateForms('contraseña',form_email).error }} </label>
+            </div>
+            <div class="form-group ">
+                <label for=" ">Nuevo correo:</label>
+                <input ngbAutofocus formControlName="correo" type="text " class="form-control " maxlength="60">
+                <label *ngIf="validateForms('correo',form_email).valid " class="text-danger"> {{validateForms('correo',form_email).error }} </label>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <a type="button" class="btn btn-white " (click)="c('cancel') "><i class="fas fa-times "></i> Cancelar</a>
+            <button type="submit" class="btn btn-primary "> <i class="fas fa-check "></i> Aceptar </button>
+        </div>
+    </form>
+
+</ng-template>

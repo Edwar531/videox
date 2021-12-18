@@ -1,9 +1,9 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { AppConfig } from 'src/app/AppConfig';
-import { HttpClient} from '@angular/common/http';
-import { tap } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { filter, tap } from 'rxjs/operators';
 import { User } from '../../models/user.model';
 import { ToastrService } from 'ngx-toastr';
 
@@ -19,7 +19,7 @@ export class AuthService {
   urlLogout = 'logout';
   userAuth: any;
   redirectNoAuth = "";
-  constructor(private http: HttpClient, private router: Router, @Inject(PLATFORM_ID) private platformid: any,private toastrS:ToastrService) { }
+  constructor(private http: HttpClient, private router: Router, @Inject(PLATFORM_ID) private platformid: any, private toastrS: ToastrService) { }
 
   // refreshToken() {
   //   let auth = this.getAuth();
@@ -30,7 +30,7 @@ export class AuthService {
     return this.http.post(this.ENDPOINT + this.urlLogin, user);
   }
 
-  register(user: User){
+  register(user: User) {
     return this.http.post(this.ENDPOINT + this.urlRegister, user);
   }
 

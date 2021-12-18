@@ -1,0 +1,64 @@
+.container-img-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: solid 4px white;
+    overflow: hidden;
+    position: relative;
+}
+
+.btn-change {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    display: none;
+}
+
+.btn-delete-img {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 12;
+}
+
+.container-buttons-img:hover>.btn-delete-img {
+    display: block;
+}
+
+
+/* .btn-delete-img {
+    position: absolute;
+    z-index: 10;
+    top: 20px;
+    right: 5px;
+} */
+
+.container-img-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.container-buttons-img:hover {
+    cursor: pointer;
+}
+
+.container-buttons-img:hover>.container-img-circle .btn-change {
+    display: flex;
+}
+
+.CardProgressUpload {
+    position: absolute;
+    z-index: 20;
+    left: 2.5%;
+    width: 95%;
+    /* border: 2px rgb(189, 189, 189) solid; */
+    box-shadow: 2px 2px 5px rgb(189, 189, 189), -2px -2px 5px rgb(189, 189, 189);
+}

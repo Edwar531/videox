@@ -6,7 +6,7 @@
             </div>
             <div class="zone-user">
                 <span *ngIf="!userAuth?.token" class="tab" (click)="showModalRegister()">Registrarse</span>
-                <span *ngIf=" !userAuth?.token " class="tab " (click)="showModalLogin() ">Ingresar</span>
+                <span *ngIf="!userAuth?.token" class="tab " (click)="showModalLogin() ">Ingresar</span>
 
                 <div class="dropdown" *ngIf="userAuth?.token ">
                     <span class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -79,12 +79,12 @@
                 <p *ngIf="accountConfirm == 'confirmed'" class="text-center text-fucsia" style="line-height: 1.2;"> <i class="fas fa-info-circle"></i> Su cuenta ha sido confirmada con éxito, ingrese sus credenciales para continuar.</p>
 
                 <label for=" ">Alias / Correo</label>
-                <input ngbAutofocus formControlName="usuarioOcorreo" type="text " class="form-control ">
+                <input ngbAutofocus formControlName="usuarioOcorreo" type="text " class="form-control " maxlength="60">
                 <label *ngIf="validate('usuarioOcorreo').valid " class="text-danger "> {{validate('usuarioOcorreo').error }} </label>
             </div>
             <div class="form-group ">
                 <label for=" ">Contraseña </label>
-                <input type="password" formControlName="clave" class="form-control ">
+                <input type="password" formControlName="clave" class="form-control " maxlength="60">
                 <label *ngIf="validate( 'clave').valid " class="text-danger "> {{validate('clave').error }} </label>
             </div>
         </div>
@@ -107,32 +107,32 @@
             <div class="row">
                 <div class="form-group col-6">
                     <label for="">Alias </label>
-                    <input ngbAutofocus formControlName="alias" type="text " class="form-control" maxlength="20">
+                    <input autocomplete="off" ngbAutofocus formControlName="alias" type="text " class="form-control" maxlength="30">
                     <label *ngIf="validateR('alias').valid " class="text-danger "> {{validateR('alias').error }} </label>
                 </div>
                 <div class="form-group col-6">
                     <label for=" ">Correo </label>
-                    <input ngbAutofocus formControlName="correo" type="email " class="form-control " maxlength="30">
+                    <input ngbAutofocus formControlName="correo" type="email " class="form-control " maxlength="40">
                     <label *ngIf="validateR('correo').valid " class="text-danger "> {{validateR('correo').error }} </label>
                 </div>
                 <div class="form-group col-6">
                     <label for="">Nombres </label>
-                    <input ngbAutofocus formControlName="nombres" type="text " class="form-control" maxlength="15">
+                    <input autocomplete="off" ngbAutofocus formControlName="nombres" type="text " class="form-control" maxlength="30">
                     <label *ngIf="validateR('nombres').valid " class="text-danger "> {{validateR('nombres').error }} </label>
                 </div>
                 <div class="form-group col-6">
                     <label for="">Apellidos </label>
-                    <input ngbAutofocus formControlName="apellidos" type="text " class="form-control" maxlength="15">
+                    <input autocomplete="off" ngbAutofocus formControlName="apellidos" type="text " class="form-control" maxlength="30">
                     <label *ngIf="validateR('apellidos').valid " class="text-danger "> {{validateR('apellidos').error }} </label>
                 </div>
                 <div class="form-group col-6">
                     <label for=" ">Contraseña</label>
-                    <input type="password" formControlName="clave" class="form-control" maxlength="30">
+                    <input autocomplete="new-password" type="password" formControlName="clave" class="form-control" maxlength="60">
                     <label *ngIf="validateR( 'clave').valid " class="text-danger "> {{validateR('clave').error }} </label>
                 </div>
                 <div class="form-group col-6">
                     <label for=" ">Confirmar Contraseña</label>
-                    <input type="password" formControlName="confirmar_clave" class="form-control" maxlength="30">
+                    <input autocomplete="new-password" type="password" formControlName="confirmar_clave" class="form-control" maxlength="60">
                     <label *ngIf="validateR( 'confirmar_clave').valid " class="text-danger "> {{validateR('confirmar_clave').error }} </label>
                     <label class="text-danger" *ngIf="formR.errors?.PasswordsNotEqual">
                       Las contraseñas deben coincidir.

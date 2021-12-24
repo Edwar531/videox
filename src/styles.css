@@ -34,21 +34,6 @@
     src: url(src\assets\fonts\Open_Sans\OpenSans-VariableFont_wdth,wght.ttf);
 }
 
-textarea:focus,
-input[type="text"]:focus,
-input[type="password"]:focus,
-input[type="datetime"]:focus,
-input[type="datetime-local"]:focus,
-input[type="date"]:focus,
-input[type="month"]:focus,
-input[type="time"]:focus,
-input[type="week"]:focus,
-input[type="number"]:focus,
-input[type="email"]:focus,
-input[type="url"]:focus,
-input[type="search"]:focus,
-input[type="tel"]:focus,
-input[type="color"]:focus,
 .form-control:focus,
 .uneditable-input:focus {
     /* border-color: white !important; */
@@ -56,8 +41,51 @@ input[type="color"]:focus,
     outline: 0 none !important;
 }
 
-.karla {
-    font-family: "Karla-Medium";
+::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgba(255, 255, 255, 0.075) !important;
+    opacity: 1;
+    /* Firefox */
+}
+
+:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: rgba(255, 255, 255, 0.075) !important;
+}
+
+::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: rgba(255, 255, 255, 0.075);
+}
+
+.iti.iti--allow-dropdown {
+    width: 100% !important;
+}
+
+.ng-select.custom {
+    border: 2px solid rgb(112, 112, 112) !important;
+    font-family: 'Karla-Medium' !important;
+    font-size: 18px !important;
+    color: rgb(207, 207, 207) !important;
+    border-radius: 3px;
+    width: 100% !important;
+}
+
+.ng-select-searchable.ng-select-clearable.ng-select.ng-select-single.ng-select-bottom.ng-select-focused {
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(255, 255, 255, 0.705) !important;
+    outline: 0 none !important;
+}
+
+.ng-select.custom .ng-select-container {
+    width: 100% !important;
+    min-height: 0px;
+    border: none;
+    background: #1d1e1f !important;
+    color: rgb(207, 207, 207) !important;
+}
+
+.ng-select input {
+    color: rgb(207, 207, 207);
 }
 
 .relative {
@@ -262,12 +290,29 @@ hr {
 
 /* INPUTS */
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+/* Firefox */
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
 .form-control {
     background: #1d1e1f !important;
     border: 2px solid rgb(112, 112, 112) !important;
     font-family: 'Karla-Medium' !important;
     font-size: 18px !important;
     color: rgb(207, 207, 207) !important;
+}
+
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
 }
 
 
@@ -453,4 +498,8 @@ label.text-danger {
     object-fit: cover;
     border: 1px rgb(184, 184, 184) solid;
     border-radius: 5px;
+}
+
+.intl-tel-input {
+    width: 100% !important;
 }

@@ -39,6 +39,9 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    // this.authS.Authenticated();
+
     this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationStart) {
         this.formS.reset();
@@ -57,7 +60,6 @@ export class NavbarComponent implements OnInit {
       }
     });
 
-    this.userAuth = this.authS.getAuth();
     this.router.events.subscribe((val: any) => {
       this.userAuth = this.authS.getAuth();
     });
@@ -87,19 +89,19 @@ export class NavbarComponent implements OnInit {
 
   formLogin() {
     this.form = this.formBuilder.group({
-      usuarioOcorreo: ["", Validators.required],
-      clave: ["", Validators.required]
+      alias_or_email: ["", Validators.required],
+      password: ["", Validators.required]
     })
   }
 
   formRegister() {
     this.formR = this.formBuilder.group({
       alias: ["", [Validators.required, Validators.minLength(4)]],
-      correo: ["", [Validators.required, Validators.email]],
-      nombres: ["", [Validators.required, Validators.minLength(3)]],
-      apellidos: ["", [Validators.required, Validators.minLength(3)]],
-      clave: [, [Validators.required, Validators.minLength(8)]],
-      confirmar_clave: [, [Validators.required, Validators.minLength(8)]],
+      email: ["", [Validators.required, Validators.email]],
+      name: ["", [Validators.required, Validators.minLength(3)]],
+      last_name: ["", [Validators.required, Validators.minLength(3)]],
+      password: [, [Validators.required, Validators.minLength(8)]],
+      confirm_password: [, [Validators.required, Validators.minLength(8)]],
     }, { validator: this.passwordCompare })
 
     this.activatedR.queryParams.subscribe(params => {
@@ -234,7 +236,7 @@ export class NavbarComponent implements OnInit {
 
   // validaciones formularios
   passwordCompare(frm: FormGroup) {
-    if (frm.controls['clave'].value == frm.controls['confirmar_clave'].value) {
+    if (frm.controls['password'].value == frm.controls['confirm_password'].value) {
       return;
     } else {
       return { 'PasswordsNotEqual': true };

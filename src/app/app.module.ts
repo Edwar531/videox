@@ -25,6 +25,9 @@ import { WatchVideoComponent } from './components/front/watch-video/watch-video.
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { VideosComponent } from './components/front/videos/videos.component';
 import { GallerryComponent } from './components/front/gallerry/gallerry.component';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { NgSelectModule } from '@ng-select/ng-select';
+
 
 @NgModule({
   declarations: [
@@ -50,7 +53,9 @@ import { GallerryComponent } from './components/front/gallerry/gallerry.componen
     ToastrModule.forRoot({maxOpened:2,closeButton:true,autoDismiss:true, enableHtml: true,timeOut: 6000,positionClass: 'toast-top-center'}),
     HttpClientModule,
     BrowserAnimationsModule,
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    NgxIntlTelInputModule,
+    NgSelectModule
   ],
   providers: [
     ValidationsMessagePipe,

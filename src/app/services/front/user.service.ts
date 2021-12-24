@@ -18,12 +18,18 @@ export class UserService {
   url_changue_image_user = 'change-image-user';
   url_delete_img = 'delete-image-user';
   urlUpdateAlias = "update-alias";
-  urlUpdateEmail = "update-email";
-  urlEditPassword = "edit-password-profile";
+  urlUpdateEmail = "confirm-update-email";
+  urlEditPassword = "change-password-profile";
   urlUpdatePersonalInfo = "update-personal-info";
   urlUpdateDocumentData = "update-document-data";
   urlUpdateContactInformation = "update-contact-information";
   urlTokenUpdateEmail = "generate-token-update-email";
+  url_data_contact = "data-contact";
+  url_get_states = "get-states";
+  url_get_cities = "get-cities";
+  urlUpdatePaypal = "update-paypal";
+  urlAddBank = "add-bank";
+  urlUpdateBank = "add-update-bank";
 
   constructor(
     private http:HttpClient
@@ -53,10 +59,10 @@ export class UserService {
   }
 
   generateTokenUpdateEmail(data:any){
-    return this.http.post(this.ENDPOINT + this.urlTokenUpdateEmail,{id:data.id, correo:data.correo,contraseña:data.contraseña});
+    return this.http.post(this.ENDPOINT + this.urlTokenUpdateEmail,{id:data.id, email:data.email,password:data.password});
   }
 
-  updateEmail(user:User){
+  confirm_update_email(user:User){
     return this.http.post(this.ENDPOINT + this.urlUpdateEmail,user);
   }
 
@@ -68,12 +74,44 @@ export class UserService {
     return this.http.post(this.ENDPOINT + this.urlUpdatePersonalInfo,user);
   }
 
-  UpdateDocumentData(user:User){
+  update_document_data(user:User){
     return this.http.post(this.ENDPOINT + this.urlUpdateDocumentData,user);
   }
 
   updateContactInformation(user:User){
     return this.http.post(this.ENDPOINT + this.urlUpdateContactInformation,user);
+  }
+
+  getDataContact(){
+    return this.http.get(this.ENDPOINT + this.url_data_contact);
+  }
+
+  getStates(country_id){
+    return this.http.post(this.ENDPOINT + this.url_get_states,{country_id:country_id});
+  }
+
+  getCities(state_id){
+    return this.http.post(this.ENDPOINT + this.url_get_cities,{state_id:state_id});
+  }
+
+  change_password(data){
+    return this.http.post(this.ENDPOINT + this.urlEditPassword,data);
+  }
+
+  update_data_personal(data){
+    return this.http.post(this.ENDPOINT + this.urlUpdatePersonalInfo,data);
+  }
+
+  update_paypal(data){
+    return this.http.post(this.ENDPOINT + this.urlUpdatePaypal,data);
+  }
+
+  update_bank(data){
+    return this.http.post(this.ENDPOINT + this.urlUpdateBank,data);
+  }
+
+  add_bank(data){
+    return this.http.post(this.ENDPOINT + this.urlAddBank,data);
   }
 
 }

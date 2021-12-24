@@ -16,9 +16,9 @@ export class ValidationsMessagePipe implements PipeTransform {
     } else if (error?.image) {
       return 'Este campo debe ser una imagen.';
     } else if (error?.min) {
-      return 'Este campo debe tener al menos: ' + error.min.min + ' caracteres.';
+      return 'Este campo debe tener un valor mínimo de: ' + error.min.min;
     } else if (error?.max) {
-      return 'Este campo debe tener al menos: ' + error.max.max + ' caracteres.';
+      return 'Este campo debe tener un valor máximo de: ' + error.max.max;
     } else if (error?.maxlength) {
       return 'arreglar';
     } else if (error?.minlength) {
@@ -33,6 +33,8 @@ export class ValidationsMessagePipe implements PipeTransform {
       return 'Este campo no debe incluir espacios.';
     } else if (error?.only_letters_numbers_underscore) {
       return 'Este campo debe incluir solo letras, números y guion bajo.';
+    } else if (error?.validatePhoneNumber) {
+      return 'Formato de número inválido para este campo.';
     } else {
       return 'Formato de texto inválido para este campo.';
     }

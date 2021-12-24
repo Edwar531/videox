@@ -25,6 +25,38 @@ export class ValidatorsService {
     };
   }
 
+
+  email(control: FormControl) {
+
+    if (control?.value) {
+      let url = control.value;
+      var regExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+      if (url.match(regExp)) {
+        return true;
+      }
+    }
+
+    return {
+      email:true
+    };
+  }
+
+  date(control: FormControl) {
+    console.log(control.value);
+
+    if (control?.value) {
+      let url = control.value;
+      var regExp = /^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/;
+      if (url.match(regExp)) {
+        return true;
+      }
+    }
+
+    return {
+      date:true
+    };
+  }
+
   urlYoutube(control: any) {
 
     // if (control?.value) {

@@ -12,6 +12,7 @@ export class InterpretFormRespService {
 
   success(resp: any, form: any) {
     console.log(resp);
+
     if (resp?.result == "ok" && resp?.message) {
       if(resp.message != "no-message"){
         this.toastr.success(resp.message);
@@ -25,6 +26,12 @@ export class InterpretFormRespService {
       }
       this.toastr.warning('<div style="list-style: none;">' + texterrors + '</div>');
     } else if (resp?.error) {
+      console.log("X!");
+
+      this.toastr.warning(resp.message)
+    } else if (resp?.result == 'error') {
+      console.log("X!2");
+
       this.toastr.warning(resp.message)
     } else {
       this.toastr.warning("Hubo un error al hacer la petición al servidor, verifique su conexión de internet.")

@@ -17,6 +17,7 @@ export class AuthService {
   urlRegister = 'register';
   urlRefreshToken = 'refresh-token';
   urlLogout = 'logout';
+  urlAuthenticated = "authenticated";
   userAuth: any;
   redirectNoAuth = "";
   constructor(private http: HttpClient, private router: Router, @Inject(PLATFORM_ID) private platformid: any, private toastrS: ToastrService) { }
@@ -42,6 +43,17 @@ export class AuthService {
     this.router.navigate([this.redirectNoAuth]);
   }
 
+  Authenticated(){
+    let auth = this.getAuth();
+    if(auth?.token){
+      return this.http.post(this.ENDPOINT + this.urlAuthenticated,"").subscribe( (resp:any) => {
+
+      });
+    }
+    return;
+
+  }
+
   getAuth() {
     if (isPlatformBrowser(this.platformid)) {
       let user: any = localStorage.getItem('user');
@@ -56,7 +68,6 @@ export class AuthService {
 
   logout() {
     if (isPlatformBrowser(this.platformid)) {
-
       localStorage.removeItem('user');
       window.location.href = "/";
     }

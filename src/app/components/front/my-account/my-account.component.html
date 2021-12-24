@@ -9,7 +9,6 @@
         <div class="card-header">
             <h3 class="m-0 text-fucsia">Subida de archivos</h3>
         </div>
-
         <div class="card-body p-0">
             <table class="table m-0" style="font-size:14px">
                 <tr>
@@ -37,7 +36,6 @@
             <button (click)="cardUpload = false" type="button" class="btn btn-primary float-right"> Aceptar</button>
         </div>
     </div>
-
 
     <h2>Mi cuenta</h2>
     <div class="card bg-dark2 mb-5">
@@ -83,14 +81,14 @@
                 <div class="col-4 form-group">
                     <label>Correo:  </label>
                     <p class="text-white">
-                        <span class="text-white" *ngIf="user.correo"> {{user.correo}} </span>
-                        <span class="text-secondary" *ngIf="!user.correo"> No especificado </span>
+                        <span class="text-white" *ngIf="user.email"> {{user.email}} </span>
+                        <span class="text-secondary" *ngIf="!user.email"> No especificado </span>
                         <button type="button" class="btn btn-primary btn-xs" (click)="showModalEmail()"> Editar </button>
                     </p>
                 </div>
                 <div class="col-4 form-group">
                     <label>Contraseña:  </label>
-                    <p class="text-white mt-1"> ******** <button type="button" class="btn btn-primary btn-xs"> Editar </button> </p>
+                    <p class="text-white mt-1"> ******** <button type="button" class="btn btn-primary btn-xs" (click)="show_modal_password()"> Editar </button> </p>
                 </div>
             </div>
         </div>
@@ -105,127 +103,253 @@
                 <div class="col-3 form-group">
                     <label>Nombres:  </label>
                     <p class="m-0">
-                        <span class="text-white" *ngIf="user.nombres"> {{user.nombres}} </span>
-                        <span class="text-secondary" *ngIf="!user.nombres"> No especificado </span>
+                        <span class="text-white" *ngIf="user.name"> {{user.name}} </span>
+                        <span class="text-secondary" *ngIf="!user.name"> No especificado </span>
                     </p>
                 </div>
                 <div class="col-3 form-group">
                     <label>Apellidos:  </label>
                     <p class="m-0">
-                        <span class="text-white" *ngIf="user.apellidos"> {{user.apellidos}}</span>
-                        <span class="text-secondary" *ngIf="!user.apellidos"> No especificado </span>
+                        <span class="text-white" *ngIf="user.last_name"> {{user.last_name}}</span>
+                        <span class="text-secondary" *ngIf="!user.last_name"> No especificado </span>
                     </p>
                 </div>
                 <div class="col-3 form-group">
                     <label>Fecha de nacimiento:  </label>
                     <p class="m-0">
-                        <span class="text-white" *ngIf="user.fecha_nacimiento"> {{user.fecha_nacimiento}} </span>
-                        <span class="text-secondary" *ngIf="!user.fecha_nacimiento"> No especificado </span>
+                        <span class="text-white" *ngIf="user.date_of_birth"> {{user.date_of_birth | date:"dd/MM/yyyy"}} </span>
+                        <span class="text-secondary" *ngIf="!user.date_of_birth"> No especificado </span>
                     </p>
                 </div>
 
                 <div class="col-3 form-group">
                     <label>Edad:  </label>
                     <p class="m-0">
-                        <span class="text-white" *ngIf="user.edad"> {{user.edad}} </span>
-                        <span class="text-secondary" *ngIf="!user.edad"> No especificado </span>
+                        <span class="text-white" *ngIf="user.age"> {{user.age}} </span>
+                        <span class="text-secondary" *ngIf="!user.age"> No especificado </span>
                     </p>
                 </div>
             </div>
-            <button type="button" class="btn btn-primary float-right">Editar</button>
+            <button type="button" class="btn btn-primary float-right" (click)="show_modal_data_personal()">Editar</button>
         </div>
     </div>
 
-    <div class="card bg-dark2 mb-5">
+    <div class="card bg-dark2 mb-5 hide">
         <div class="card-header bg-dark-l">
-            <h4 class="m-0">Documentación</h4>
+            <h4 class="m-0">Identificación</h4>
         </div>
         <div class="card-body">
             <div class="row">
                 <div class="col-3 form-group">
-                    <label>Tipo de documentación:  </label>
+                    <label>Tipo de identificación:  </label>
                     <p class="m-0">
-                        <span class="text-white" *ngIf="user.tipo_de_dni"> {{user.tipo_de_dni}} </span>
-                        <span class="text-secondary" *ngIf="!user.tipo_de_dni"> No especificado </span>
+                        <span class="text-white" *ngIf="user.document_type"> {{user.document_type}} </span>
+                        <span class="text-secondary" *ngIf="!user.document_type"> No especificado </span>
                     </p>
                 </div>
                 <div class="col-3 form-group">
-                    <label>Número de documentación:  </label>
+                    <label>Número de identificación:  </label>
                     <p class="m-0">
-                        <span class="text-white" *ngIf="user.numero_de_dni"> {{user.numero_de_dni}} </span>
-                        <span class="text-secondary" *ngIf="!user.numero_de_dni"> No especificado </span>
+                        <span class="text-white" *ngIf="user.document_number"> {{user.document_number}} </span>
+                        <span class="text-secondary" *ngIf="!user.document_number"> No especificado </span>
                     </p>
                 </div>
                 <div class="col-3 form-group">
                     <label>Nacionalidad:  </label>
                     <p class="m-0">
-                        <span class="text-white" *ngIf="user.nacionalidad"> {{user.nacionalidad}} </span>
-                        <span class="text-secondary" *ngIf="!user.nacionalidad"> No especificado </span>
+                        <span class="text-white" *ngIf="user.nationality"> {{user.nationality}} </span>
+                        <span class="text-secondary" *ngIf="!user.nationality"> No especificado </span>
                     </p>
                 </div>
             </div>
-            <button type="button" class="btn btn-primary float-right">Editar</button>
+            <button type="button" class="btn btn-primary float-right" (click)="show_modal_documents()">Editar</button>
         </div>
     </div>
+
+    <div class="card bg-dark2 mb-5 hide">
+        <div class="card-header bg-dark-l">
+            <h4 class="m-0"> Métodos de pago </h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12 form-group">
+                    <label>Cuenta de Paypal  </label>
+                    <p class="m-0">
+                        <span class="text-white" *ngIf="user.paypal"> {{user.paypal}} </span>
+                        <span class="text-secondary" *ngIf="!user.paypal"> No especificado </span>
+                        <button type="button" class="btn btn-primary btn-xs" (click)="show_modal_paypal()"> Editar </button>
+                    </p>
+                </div>
+                <hr>
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header p-2">
+                            <label> Cuentas Bancarias  </label>
+                        </div>
+                        <div class="card-body p-2">
+
+                            <div class="card bg-dark mb-2" *ngFor="let bank of user.banks">
+                                <div class="card-body p-2 form-inline">
+                                    <div class="mr-5">
+                                        <label for="">Pais:</label>
+
+                                        <p class="m-0">
+                                            {{bank.country}}
+                                        </p>
+                                    </div>
+
+                                    <div class="mr-5">
+                                        <label for="">Nombre del banco:</label>
+
+                                        <p class="m-0">
+                                            {{bank.name_bank}}
+                                        </p>
+                                    </div>
+
+                                    <div class="mr-5">
+                                        <label for="">Tipo de cuenta:</label>
+
+                                        <p class="m-0">
+                                            {{bank.type}}
+                                        </p>
+                                    </div>
+
+                                    <div class="mr-5">
+                                        <label for="">Propietario:</label>
+
+                                        <p class="m-0">
+                                            {{bank.owner}}
+                                        </p>
+                                    </div>
+
+
+                                    <div class="mr-5">
+                                        <label for="">Identificación propietario:</label>
+
+                                        <p class="m-0">
+                                            {{bank.identification_owner}}
+                                        </p>
+                                    </div>
+
+                                    <div class="mr-5">
+                                        <label for="">Número de cuenta:</label>
+
+                                        <p class="m-0">
+                                            {{bank.number}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <button type="button" class="btn btn-primary btn-sm float-right" (click)="show_modal_bank()"> Agregar cuenta bancaria </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            }
+        </div>
+    </div>
+    <!-- <div class="card mb-5">
+        <div class="card-body">
+            <form [formGroup]="form_contact" *ngIf="form_contact" (ngSubmit)="save_data_contact()">
+
+                <div class="row">
+                    <div class="col-4 form-group">
+                        <label for="">Whatsapp</label>
+                        <ngx-intl-tel-input [cssClass]="'form-control'" [preferredCountries]="preferredCountries" [enableAutoCountrySelect]="true" [enablePlaceholder]="true" [searchCountryFlag]="true" [searchCountryField]="[SearchCountryField.Iso2,SearchCountryField.Name]" [selectFirstCountry]="false"
+                            [selectedCountryISO]="CountryISO.Ecuador" maxLength="15" [phoneValidation]="true" [separateDialCode]="separateDialCode" [numberFormat]="PhoneNumberFormat.National" name="phone" formControlName="telefono">
+                        </ngx-intl-tel-input>
+                    </div>
+                    <div class="col-4 form-group">
+                        <label for="">Teléfono opcional</label>
+                        <ngx-intl-tel-input [cssClass]="'form-control'" [preferredCountries]="preferredCountries" [enableAutoCountrySelect]="true" [enablePlaceholder]="true" [searchCountryFlag]="true" [searchCountryField]="[
+                  SearchCountryField.Iso2,
+                  SearchCountryField.Name
+                ]" [selectFirstCountry]="false" [selectedCountryISO]="CountryISO.India" maxLength="15" [phoneValidation]="true" [separateDialCode]="separateDialCode" [numberFormat]="PhoneNumberFormat.National" name="phone" formControlName="telefono">
+                        </ngx-intl-tel-input>
+                    </div>
+                    <div class="col-4 form-group">
+                        <label for="">Pais</label>
+                        <input class="form-control" type="text" name="" id="">
+                    </div>
+
+                    <div class="col-12 form-group">
+                        <button type="submit" class="btn btn-primary float-right"> Guardar </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div> -->
 
     <div class="card bg-dark2 mb-5">
         <div class="card-header bg-dark-l">
             <h4 class="m-0">Contacto</h4>
+
         </div>
         <div class="card-body">
+
+            <form action=""></form>
+
+
             <div class="row">
                 <div class="col-3 form-group">
                     <label>Whatsapp:  </label>
                     <p class="m-0">
-                        <span class="text-white" *ngIf="user.whatsapp"> {{user.whatsapp}} </span>
-                        <span class="text-secondary" *ngIf="!user.whatsapp"> No especificado </span>
+
+                        <span class="text-white" *ngIf="whatsapp?.internationalNumber">{{ whatsapp.internationalNumber}} </span>
+                        <span class="text-secondary" *ngIf="!whatsapp?.internationalNumber"> No especificado </span>
                     </p>
                 </div>
                 <div class="col-3 form-group">
                     <label>Teléfono:  </label>
                     <p class="m-0">
-                        <span class="text-white" *ngIf="user.telefono"> {{user.telefono}} </span>
-                        <span class="text-secondary" *ngIf="!user.telefono"> No especificado </span>
+                        <span class="text-white" *ngIf="phone?.internationalNumber"> {{phone.internationalNumber}} </span>
+                        <span class="text-secondary" *ngIf="!phone?.internationalNumber"> No especificado </span>
                     </p>
                 </div>
                 <div class="col-3 form-group">
                     <label>Pais:  </label>
                     <p class="m-0">
-                        <span class="text-white" *ngIf="user.pais"> {{user.pais}} </span>
-                        <span class="text-secondary" *ngIf="!user.pais"> No especificado </span>
+                        <span class="text-white" *ngIf="user.country"> {{user.country}} </span>
+                        <span class="text-secondary" *ngIf="!user.country"> No especificado </span>
                     </p>
                 </div>
                 <div class="col-3 form-group">
                     <label>Estado / Provincia:  </label>
                     <p class="m-0">
-                        <span class="text-white" *ngIf="user.estado_provincia"> {{user.estado_provincia}} </span>
-                        <span class="text-secondary" *ngIf="!user.estado_provincia"> No especificado </span>
+                        <span class="text-white" *ngIf="user.state"> {{user.state}} </span>
+                        <span class="text-secondary" *ngIf="!user.state"> No especificado </span>
                     </p>
                 </div>
                 <div class="col-3 form-group">
                     <label>Ciudad:  </label>
                     <p class="m-0">
-                        <span class="text-white" *ngIf="user.ciudad"> {{user.ciudad}} </span>
-                        <span class="text-secondary" *ngIf="!user.ciudad"> No especificado </span>
+                        <span class="text-white" *ngIf="user.city"> {{user.city}} </span>
+                        <span class="text-secondary" *ngIf="!user.city"> No especificado </span>
                     </p>
                 </div>
 
                 <div class="col-3 form-group">
                     <label>Municipio:  </label>
                     <p class="m-0">
-                        <span class="text-white" *ngIf="user.municipio"> {{user.municipio}} </span>
-                        <span class="text-secondary" *ngIf="!user.municipio"> No especificado </span>
+                        <span class="text-white" *ngIf="user.municipality"> {{user.municipality}} </span>
+                        <span class="text-secondary" *ngIf="!user.municipality"> No especificado </span>
                     </p>
                 </div>
                 <div class="col-12 form-group">
                     <label>Dirección:  </label>
                     <p class="m-0">
-                        <span class="text-white" *ngIf="user.direccion"> {{user.direccion}} </span>
-                        <span class="text-secondary" *ngIf="!user.direccion"> No especificado </span>
+                        <span class="text-white" *ngIf="user.address"> {{user.address}} </span>
+                        <span class="text-secondary" *ngIf="!user.address"> No especificado </span>
                     </p>
                 </div>
             </div>
-            <button type="button" class="btn btn-primary float-right">Editar</button>
+            <button type="button" class="btn btn-primary float-right" (click)="getDataContact()">Editar</button>
         </div>
     </div>
 </div>
@@ -241,7 +365,7 @@
             <div class="form-group ">
                 <label for=" ">Alias</label>
                 <input ngbAutofocus formControlName="alias" type="text " class="form-control " maxlength="30">
-                <label *ngIf="validateFormAlias('alias').valid " class="text-danger"> {{validateFormAlias('alias').error }} </label>
+                <label *ngIf="validateForms('alias',formAlias).valid " class="text-danger"> {{validateForms('alias',formAlias).error }} </label>
             </div>
         </div>
         <div class="modal-footer">
@@ -274,31 +398,324 @@
         <h4 class="modal-title text-fucsia " id="modal-basic-title "> <i class="fas fa-sign-out-alt "></i> Cambio de correo</h4>
         <button type="button " class="close " (click)="d( 'Cross click') "><span >×</span></button>
     </div>
-    <!-- <div class="modal-body">
-        <p class=" my-2"> Al presionar <span class="text-fucsia-l">"Aceptar"</span> se enviará un código a su correo actual, utilice este código para completar el cambio de correo. </p>
-    </div>
-    <div class="modal-footer">
-        <a type="button" class="btn btn-white " (click)="c('cancel') "><i class="fas fa-times "></i> Cancelar</a>
-        <button (click)="delete_img()" type="submit" class="btn btn-primary "> <i class="fas fa-check "></i> Aceptar</button>
-    </div> -->
-    <form [formGroup]="form_email" *ngIf="form_email" (ngSubmit)="change_email()">
+    <form [formGroup]="form_email" *ngIf="form_email && emailStep == 1" (ngSubmit)="change_email_step_1()">
         <div class="modal-body">
+            <h6>Pasos:
+                <div class="steps form-inline">
+                    <div class="circle" [ngClass]="{'active':emailStep == 1}">
+                        <div>1</div>
+                    </div>
+                    <div class="circle" [ngClass]="{'active':emailStep == 2}">
+                        <div>2</div>
+                    </div>
+                </div>
+            </h6>
             <p class="text-justify"></p>
             <div class="form-group ">
                 <label for=" ">Tu contraseña:</label>
-                <input ngbAutofocus formControlName="contraseña" type="password" class="form-control " maxlength="60">
+                <input autocomplete="new-password" ngbAutofocus formControlName="contraseña" type="password" class="form-control " maxlength="60">
                 <label *ngIf="validateForms('contraseña',form_email).valid " class="text-danger"> {{validateForms('contraseña',form_email).error }} </label>
             </div>
-            <div class="form-group ">
+            <div class="form-group">
                 <label for=" ">Nuevo correo:</label>
                 <input ngbAutofocus formControlName="correo" type="text " class="form-control " maxlength="60">
                 <label *ngIf="validateForms('correo',form_email).valid " class="text-danger"> {{validateForms('correo',form_email).error }} </label>
             </div>
+        </div>
 
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary "> <i class="fas fa-check "></i> Solicitar cambio </button>
+            <a type="button" class="btn btn-white " (click)="c('cancel') "><i class="fas fa-times "></i> Cancelar</a>
+        </div>
+    </form>
+
+    <form [formGroup]="form_email_confirm" *ngIf="form_email_confirm && emailStep == 2" (ngSubmit)="change_email_step_2()">
+        <div class="modal-body">
+            <h6>Pasos:
+                <div class="steps form-inline">
+                    <div class="circle" [ngClass]="{'active':emailStep == 1}">
+                        <div>1</div>
+                    </div>
+                    <div class="circle" [ngClass]="{'active':emailStep == 2}">
+                        <div>2</div>
+                    </div>
+                </div>
+            </h6>
+            <p class="text-justify">Se ha enviado un código de confirmación al correo: " <span class="text-fucsia-l">{{newEmail}}</span> ", ingresa el código en el siguiente campo para confirmar el cambio.</p>
+
+            <div class="form-group">
+                <label for="" class="text-center">Código</label>
+                <input type="text" class="form-control m-auto" formControlName="code" placeholder="XXXXXXXX" maxlength="8" style="max-width: 125px;">
+            </div>
+            <label *ngIf="validateForms('code',form_email_confirm).valid " class="text-danger text-center"> {{validateForms('code',form_email_confirm).error }} </label>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary "> <i class="fas fa-check "></i> Confirmar cambio </button>
+            <a type="button" class="btn btn-white " (click)="c('cancel') "><i class="fas fa-times "></i> Cancelar</a>
+        </div>
+    </form>
+</ng-template>
+
+<!-- MODAL PASSWORD -->
+<ng-template #modal_password let-c="close " let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title text-fucsia " id="modal-basic-title "> <i class="fas fa-sign-out-alt "></i> Cambiar contraseña</h4>
+    </div>
+    <form [formGroup]="form_password" *ngIf="form_password" (ngSubmit)="change_password()">
+        <div class="modal-body">
+            <div class="form-group">
+                <label for=" ">Contraseña actual:</label>
+                <input maxlength="60" autocomplete="new-password" ngbAutofocus formControlName="password" type="password" class="form-control " maxlength="60">
+                <label *ngIf="validateForms('password',form_password).valid " class="text-danger"> {{validateForms('password',form_password).error }} </label>
+            </div>
+            <div class="form-group">
+                <label for=" ">Nueva contraseña:</label>
+                <input maxlength="60" autocomplete="new-password" ngbAutofocus formControlName="new_password" type="password" class="form-control " maxlength="60">
+                <label *ngIf="validateForms('new_password',form_password).valid " class="text-danger"> {{validateForms('new_password',form_password).error }} </label>
+            </div>
+            <div class="form-group">
+                <label for=" ">Repita la nueva contraseña:</label>
+                <input maxlength="60" autocomplete="new-password" ngbAutofocus formControlName="repeat_new_password" type="password" class="form-control " maxlength="60">
+                <label *ngIf="validateForms('repeat_new_password',form_password).valid " class="text-danger"> {{validateForms('repeat_new_password',form_password).error }} </label>
+                <label class="text-danger" *ngIf="form_password.errors?.PasswordsNotEqual">
+                  El campo de "Nueva contraseña" debe coincidir con este campo.
+                </label>
+            </div>
         </div>
         <div class="modal-footer">
             <a type="button" class="btn btn-white " (click)="c('cancel') "><i class="fas fa-times "></i> Cancelar</a>
-            <button type="submit" class="btn btn-primary "> <i class="fas fa-check "></i> Aceptar </button>
+            <button type="submit" class="btn btn-primary "> <i class="fas fa-check "></i> Cambiar </button>
+        </div>
+    </form>
+</ng-template>
+
+<!-- MODAL DATA PERSONAL -->
+<ng-template #modal_data_personal let-c="close " let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title text-fucsia " id="modal-basic-title "> <i class="fas fa-sign-out-alt "></i> Cambiar datos personales</h4>
+    </div>
+    <form [formGroup]="form_data_personal" *ngIf="form_data_personal" (ngSubmit)="update_data_personal()">
+        <div class="modal-body">
+            <div class="row">
+                <div class="form-group col-4">
+                    <label for=" ">Nombres:</label>
+                    <input maxlength="30" ngbAutofocus formControlName="name" type="text" class="form-control ">
+                    <label *ngIf="validateForms('name',form_data_personal).valid " class="text-danger"> {{validateForms('name',form_data_personal).error }} </label>
+                </div>
+                <div class="form-group col-4">
+                    <label for=" ">Apellidos:</label>
+                    <input maxlength="30" ngbAutofocus formControlName="last_name" type="text" class="form-control">
+                    <label *ngIf="validateForms('last_name',form_data_personal).valid " class="text-danger"> {{validateForms('last_name',form_data_personal).error }} </label>
+                </div>
+                <div class="form-group col-4">
+                    <label for=" ">Fecha de Nacimiento:</label>
+
+                    <input min="{{dateNowSub100}}" max="{{dateNow}}" ngbAutofocus formControlName="date_of_birth" type="date" class="form-control">
+                    <label *ngIf="validateForms('date_of_birth',form_data_personal).valid " class="text-danger"> {{validateForms('date_of_birth',form_data_personal).error }} </label>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a type="button" class="btn btn-white " (click)="c('cancel') "><i class="fas fa-times "></i> Cancelar</a>
+            <button type="submit" class="btn btn-primary "> <i class="fas fa-check "></i> Guardar  </button>
+        </div>
+    </form>
+</ng-template>
+
+
+<!-- MODAL INDENTIFICATION -->
+<ng-template #modal_document let-c="close " let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title text-fucsia " id="modal-basic-title "> <i class="fas fa-sign-out-alt "></i> Editar identificación</h4>
+    </div>
+    <form [formGroup]="form_document" *ngIf="form_document" (ngSubmit)="update_document_data()">
+        <div class="modal-body">
+            <div class="row">
+
+                <div class="form-group col-4">
+                    <label for=" ">Tipo de documento:</label>
+                    <select formControlName="document_type" ngbAutofocus name="" id="" class="form-control">
+                      <option value="D.N.I.">D.N.I.</option>
+                      <option value="Licencia de conducir">Licencia de conducir</option>
+                      <option value="Pasaporte">Pasaporte</option>
+                      <option value="Visa o residencia permanente">Visa o residencia permanente</option>
+                    </select>
+                    <label *ngIf="validateForms('document_type',form_document).valid " class="text-danger"> {{validateForms('document_type',form_document).error }} </label>
+                </div>
+                <div class="form-group col-4">
+                    <label for=" ">Número de documento:</label>
+                    <input type="number" min="0" max="99999999999999" ngbAutofocus formControlName="document_number" class="form-control">
+                    <label *ngIf="validateForms('document_number',form_document).valid " class="text-danger"> {{validateForms('document_number',form_document).error }} </label>
+                </div>
+                <div class="form-group col-4">
+                    <label for=" ">Nacionalidad:</label>
+                    <select formControlName="nationality" ngbAutofocus name="" id="" class="form-control">
+                      <option value="Extranjera">Extranjera</option>
+                      <option value="Natural">Natural</option>
+                    </select>
+                    <label *ngIf="validateForms('nationality',form_document).valid " class="text-danger"> {{validateForms('nationality',form_document).error }} </label>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a type="button" class="btn btn-white " (click)="c('cancel') "><i class="fas fa-times "></i> Cancelar</a>
+            <button type="submit" class="btn btn-primary "> <i class="fas fa-check "></i> Guardar  </button>
+        </div>
+    </form>
+</ng-template>
+
+<!-- MODAL PAYPAL -->
+<ng-template #modal_paypal let-c="close " let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title text-fucsia " id="modal-basic-title "> Editar Paypal</h4>
+    </div>
+    <form [formGroup]="form_paypal" *ngIf="form_paypal" (ngSubmit)="update_paypal()">
+        <div class="modal-body">
+            <div class="form-group">
+                <label for=" ">Paypal:</label>
+                <input type="email" max="60" ngbAutofocus formControlName="paypal" class="form-control">
+                <label *ngIf="validateForms('paypal',form_paypal).valid " class="text-danger"> {{validateForms('paypal',form_paypal).error }} </label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a type="button" class="btn btn-white " (click)="c('cancel') "><i class="fas fa-times "></i> Cancelar</a>
+            <button type="submit" class="btn btn-primary "> <i class="fas fa-check "></i> Guardar </button>
+        </div>
+    </form>
+</ng-template>
+
+<!-- MODAL BANK -->
+<ng-template #modal_bank let-c="close " let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title text-fucsia " id="modal-basic-title "> <span *ngIf="edit_bank?.name_bank">Editar</span> <span *ngIf="!edit_bank?.name_bank">Agregar </span> cuenta bancaria</h4>
+    </div>
+    <form [formGroup]="form_bank" *ngIf="form_bank" (ngSubmit)="update_bank()">
+        <div class="modal-body">
+
+            <!--
+
+type
+owner
+identification_owner -->
+            <div class="row">
+                <div class="form-group col-4">
+                    <label for=" ">Pais:</label>
+                    <ng-select class="custom" notFoundText="No encontrado." [items]="countries" bindLabel="name" bindValue="id" formControlName="country_id">
+                    </ng-select>
+
+                    <label *ngIf="validateForms('country_id',form_bank).valid " class="text-danger"> {{validateForms('country_id',form_bank).error }} </label>
+                </div>
+                <div class="form-group col-4">
+                    <label for=" ">Nombre del banco:</label>
+                    <input type="text" class="form-control" maxlength="60" formControlName="name_bank">
+                    <label *ngIf="validateForms('name_bank',form_bank).valid " class="text-danger"> {{validateForms('name_bank',form_bank).error }} </label>
+                </div>
+                <div class="form-group col-4">
+                    <label for=" ">Tipo de cuenta:</label>
+
+                    <select name="" id="" class="form-control" formControlName="type">
+                        <option value="Ahorro">Ahorro</option>
+                        <option value="Corriente">Corriente</option>
+                      </select>
+                    <label *ngIf="validateForms('type',form_bank).valid " class="text-danger"> {{validateForms('type',form_bank).error }} </label>
+                </div>
+                <div class="form-group col-4">
+                    <label for=" ">Propietario:</label>
+                    <input type="text" class="form-control" maxlength="60" formControlName="owner">
+                    <label *ngIf="validateForms('owner',form_bank).valid " class="text-danger"> {{validateForms('owner',form_bank).error }} </label>
+
+                </div>
+                <div class="form-group col-4">
+                    <label for=" ">Identificación propietario:</label>
+                    <input type="number" class="form-control" formControlName="identification_owner">
+                    <label *ngIf="validateForms('identification_owner',form_bank).valid " class="text-danger"> {{validateForms('identification_owner',form_bank).error }} </label>
+                </div>
+
+                <div class="form-group col-12">
+                    <label for=" ">Número de cuenta:</label>
+                    <input type="number" class="form-control" formControlName="number">
+                    <label *ngIf="validateForms('number',form_bank).valid " class="text-danger"> {{validateForms('number',form_bank).error }} </label>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a type="button" class="btn btn-white " (click)="c('cancel') "><i class="fas fa-times "></i> Cancelar</a>
+            <button type="submit" class="btn btn-primary "> <i class="fas fa-check "></i> Guardar </button>
+        </div>
+    </form>
+</ng-template>
+
+<!-- MODAL CONTACTO -->
+<ng-template #modal_contact let-c="close " let-d="dismiss">
+
+    <div class="modal-header">
+        <h4 class="m-0">Editar datos de contacto</h4>
+    </div>
+    <form [formGroup]="form_contact" *ngIf="form_contact && countries.length != 0" (ngSubmit)="save_data_contact()">
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-4 form-group">
+                    {{CountryISO.Ecuador}}
+                    <label for="">Whatsapp</label>
+                    <ngx-intl-tel-input maxlength="30" [cssClass]="'form-control'" [preferredCountries]="preferredCountries" [enableAutoCountrySelect]="true" [enablePlaceholder]="false" [searchCountryFlag]="true" [searchCountryField]="[SearchCountryField.Iso2,SearchCountryField.Name]"
+                        [selectFirstCountry]="false" [selectedCountryISO]="whatsapp?.countryCode?whatsapp.countryCode :CountryISO.Ecuador" maxLength="15" [phoneValidation]="true" [separateDialCode]="separateDialCode" [numberFormat]="PhoneNumberFormat.National"
+                        name="phone" formControlName="whatsapp">
+                    </ngx-intl-tel-input>
+                    <label *ngIf="validateForms('whatsapp',form_contact).valid " class="text-danger"> {{validateForms('whatsapp',form_contact).error }} </label>
+                </div>
+                <div class="col-4 form-group">
+                    <label for="">Teléfono opcional</label>
+                    <ngx-intl-tel-input maxlength="30" [cssClass]="'form-control'" [preferredCountries]="preferredCountries" [enableAutoCountrySelect]="true" [enablePlaceholder]="false" [searchCountryFlag]="true" [searchCountryField]="[
+          SearchCountryField.Iso2,
+          SearchCountryField.Name
+        ]" [selectFirstCountry]="false" [selectedCountryISO]="phone?.countryCode?phone.countryCode :CountryISO.Ecuador" maxLength="15" [phoneValidation]="true" [separateDialCode]="separateDialCode" [numberFormat]="PhoneNumberFormat.National" name="phone"
+                        formControlName="phone">
+                    </ngx-intl-tel-input>
+                    <label *ngIf="validateForms('phone',form_contact).valid " class="text-danger"> {{validateForms('phone',form_contact).error }} </label>
+                </div>
+                <div class="col-4 form-group" *ngIf="countries.length != 0">
+                    <label for=""> Pais <i class="fas fa-asterisk"></i> </label>
+                    <ng-select #selectPais (change)="getStates($event)" class="custom" notFoundText="No encontrado." [items]="countries" bindLabel="name" bindValue="id" formControlName="country_id">
+                    </ng-select>
+                    <label *ngIf="validateForms('country_id',form_contact).valid " class="text-danger"> {{validateForms('country_id',form_contact).error }} </label>
+                </div>
+                <div class="col-4 form-group" *ngIf="states.length != 0">
+                    <label for=""> Estado / Provincia <i class="fas fa-asterisk"></i> </label>
+                    <ng-select #selectState (change)="getCities($event)" class="custom" [items]="states" bindLabel="name" bindValue="id" notFoundText="No encontrado." #selectDropdown formControlName="state_id">
+                    </ng-select>
+                    <label *ngIf="validateForms('state_id',form_contact).valid " class="text-danger"> {{validateForms('state_id',form_contact).error }} </label>
+                    <label class="text-danger" *ngIf="form_contact.errors?.stateRequired">
+                      Este campo es requerido
+                    </label>
+                </div>
+                <div class="col-4 form-group" *ngIf="cities.length != 0">
+                    <label for=""> Ciudad <i class="fas fa-asterisk"></i> </label>
+                    <ng-select #selectCity class="custom" [items]="cities" bindLabel="name" bindValue="id" notFoundText="No encontrado." formControlName="city_id">
+                    </ng-select>
+                    <label *ngIf="validateForms('city_id',form_contact).valid " class="text-danger"> {{validateForms('city_id',form_contact).error }} </label>
+                    <label class="text-danger" *ngIf="form_contact.errors?.cityRequired">
+                      Este campo es requerido
+                    </label>
+                </div>
+                <div class="col-4 form-group">
+                    <label for=""> Municipio </label>
+                    <input maxlength="40" type="text" class="form-control" formControlName="municipality">
+                    <label *ngIf="validateForms('municipality',form_contact).valid " class="text-danger"> {{validateForms('municipality',form_contact).error }} </label>
+                </div>
+                <div class="col-12 form-group">
+                    <label for=""> Dirección </label>
+                    <input maxlength="255" type="text" class="form-control" formControlName="address">
+                    <label *ngIf="validateForms('address',form_contact).valid " class="text-danger"> {{validateForms('address',form_contact).error }} </label>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="row">
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary float-right ml-1"> Guardar </button>
+                    <a type="button" class="btn btn-white " (click)="c('cancel') "><i class="fas fa-times "></i> Cancelar</a>
+                </div>
+            </div>
         </div>
     </form>
 

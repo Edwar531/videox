@@ -39,7 +39,7 @@ export class VideosComponent implements OnInit {
     this.sending = true;
     this.VideoS.videos(typeFilter,search).subscribe( (data:any)=>{
       console.log(data);
-
+      
       this.videos = data.videos;
       this.tags = data.tags;
       this.sending = false;

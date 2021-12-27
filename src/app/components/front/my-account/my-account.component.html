@@ -166,136 +166,12 @@
         </div>
     </div>
 
-    <div class="card bg-dark2 mb-5 hide">
-        <div class="card-header bg-dark-l">
-            <h4 class="m-0"> Métodos de pago </h4>
-        </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-12 form-group">
-                    <label>Cuenta de Paypal  </label>
-                    <p class="m-0">
-                        <span class="text-white" *ngIf="user.paypal"> {{user.paypal}} </span>
-                        <span class="text-secondary" *ngIf="!user.paypal"> No especificado </span>
-                        <button type="button" class="btn btn-primary btn-xs" (click)="show_modal_paypal()"> Editar </button>
-                    </p>
-                </div>
-                <hr>
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header p-2">
-                            <label> Cuentas Bancarias  </label>
-                        </div>
-                        <div class="card-body p-2">
-
-                            <div class="card bg-dark mb-2" *ngFor="let bank of user.banks">
-                                <div class="card-body p-2 form-inline">
-                                    <div class="mr-5">
-                                        <label for="">Pais:</label>
-
-                                        <p class="m-0">
-                                            {{bank.country}}
-                                        </p>
-                                    </div>
-
-                                    <div class="mr-5">
-                                        <label for="">Nombre del banco:</label>
-
-                                        <p class="m-0">
-                                            {{bank.name_bank}}
-                                        </p>
-                                    </div>
-
-                                    <div class="mr-5">
-                                        <label for="">Tipo de cuenta:</label>
-
-                                        <p class="m-0">
-                                            {{bank.type}}
-                                        </p>
-                                    </div>
-
-                                    <div class="mr-5">
-                                        <label for="">Propietario:</label>
-
-                                        <p class="m-0">
-                                            {{bank.owner}}
-                                        </p>
-                                    </div>
-
-
-                                    <div class="mr-5">
-                                        <label for="">Identificación propietario:</label>
-
-                                        <p class="m-0">
-                                            {{bank.identification_owner}}
-                                        </p>
-                                    </div>
-
-                                    <div class="mr-5">
-                                        <label for="">Número de cuenta:</label>
-
-                                        <p class="m-0">
-                                            {{bank.number}}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <button type="button" class="btn btn-primary btn-sm float-right" (click)="show_modal_bank()"> Agregar cuenta bancaria </button>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-            }
-        </div>
-    </div>
-    <!-- <div class="card mb-5">
-        <div class="card-body">
-            <form [formGroup]="form_contact" *ngIf="form_contact" (ngSubmit)="save_data_contact()">
-
-                <div class="row">
-                    <div class="col-4 form-group">
-                        <label for="">Whatsapp</label>
-                        <ngx-intl-tel-input [cssClass]="'form-control'" [preferredCountries]="preferredCountries" [enableAutoCountrySelect]="true" [enablePlaceholder]="true" [searchCountryFlag]="true" [searchCountryField]="[SearchCountryField.Iso2,SearchCountryField.Name]" [selectFirstCountry]="false"
-                            [selectedCountryISO]="CountryISO.Ecuador" maxLength="15" [phoneValidation]="true" [separateDialCode]="separateDialCode" [numberFormat]="PhoneNumberFormat.National" name="phone" formControlName="telefono">
-                        </ngx-intl-tel-input>
-                    </div>
-                    <div class="col-4 form-group">
-                        <label for="">Teléfono opcional</label>
-                        <ngx-intl-tel-input [cssClass]="'form-control'" [preferredCountries]="preferredCountries" [enableAutoCountrySelect]="true" [enablePlaceholder]="true" [searchCountryFlag]="true" [searchCountryField]="[
-                  SearchCountryField.Iso2,
-                  SearchCountryField.Name
-                ]" [selectFirstCountry]="false" [selectedCountryISO]="CountryISO.India" maxLength="15" [phoneValidation]="true" [separateDialCode]="separateDialCode" [numberFormat]="PhoneNumberFormat.National" name="phone" formControlName="telefono">
-                        </ngx-intl-tel-input>
-                    </div>
-                    <div class="col-4 form-group">
-                        <label for="">Pais</label>
-                        <input class="form-control" type="text" name="" id="">
-                    </div>
-
-                    <div class="col-12 form-group">
-                        <button type="submit" class="btn btn-primary float-right"> Guardar </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div> -->
-
     <div class="card bg-dark2 mb-5">
         <div class="card-header bg-dark-l">
-            <h4 class="m-0">Contacto</h4>
+            <h4 class="m-0">Contacto </h4>
 
         </div>
         <div class="card-body">
-
-            <form action=""></form>
-
-
             <div class="row">
                 <div class="col-3 form-group">
                     <label>Whatsapp:  </label>
@@ -348,14 +224,116 @@
                         <span class="text-secondary" *ngIf="!user.address"> No especificado </span>
                     </p>
                 </div>
+
             </div>
             <button type="button" class="btn btn-primary float-right" (click)="getDataContact()">Editar</button>
         </div>
     </div>
+
+    <div class="card bg-dark2 mb-5 hide">
+        <div class="card-header bg-dark-l">
+            <h4 class="m-0"> Métodos de pago </h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12 form-group">
+                    <label>Cuenta de Paypal  </label>
+                    <p class="m-0">
+                        <span class="text-white" *ngIf="user.paypal"> {{user.paypal}} </span>
+                        <span class="text-secondary" *ngIf="!user.paypal"> No especificado </span>
+                        <button type="button" class="btn btn-primary btn-xs" (click)="show_modal_paypal()"> Editar </button>
+                    </p>
+                </div>
+                <hr>
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header p-2">
+                            <label> Cuentas Bancarias  </label>
+                        </div>
+                        <div class="card-body p-2">
+
+                            <div class="card bg-dark mb-2" *ngFor="let bank of user.banks">
+                                <div class="card-body p-2">
+                                    <div class="form-inline">
+                                        <div class="mr-5 mb-2">
+                                            <p class="text-fucsia-l m-0">Pais:</p>
+
+                                            <p class="m-0">
+                                                {{bank.country}}
+                                            </p>
+                                        </div>
+
+                                        <div class="mr-5 mb-2">
+                                            <p class="text-fucsia-l m-0">Nombre del banco:</p>
+
+                                            <p class="m-0">
+                                                {{bank.name_bank}}
+                                            </p>
+                                        </div>
+
+                                        <div class="mr-5 mb-2">
+                                            <p class="text-fucsia-l m-0">Tipo de cuenta:</p>
+
+                                            <p class="m-0">
+                                                {{bank.type}}
+                                            </p>
+                                        </div>
+
+                                        <div class="mr-5 mb-2">
+                                            <p class="text-fucsia-l m-0">Propietario:</p>
+
+                                            <p class="m-0">
+                                                {{bank.owner}}
+                                            </p>
+                                        </div>
+
+
+                                        <div class="mr-5 mb-2">
+                                            <p class="text-fucsia-l m-0">Identificación propietario:</p>
+
+                                            <p class="m-0">
+                                                {{bank.identification_owner}}
+                                            </p>
+                                        </div>
+
+                                        <div class="mr-5 mb-2">
+                                            <p class="text-fucsia-l m-0">Número de cuenta:</p>
+
+                                            <p class="m-0">
+                                                {{bank.number}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <button (click)="show_modal_bank('edit',bank)" type="button" class="btn btn-white float-right btn-xs"> <i class="fas fa-pencil-alt"></i> </button>
+                                            <button (click)="show_modal_delete_bank(bank.id)" type="button" class="btn btn-danger float-right btn-xs mr-1"> <i class="fas fa-times"></i> </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <button type="button" class="btn btn-primary btn-sm float-right" (click)="show_modal_bank()"> Agregar cuenta bancaria </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
 </div>
 
 <!-- MODAL LOGIN -->
-<ng-template #modal_alias let-c="close " let-d="dismiss ">
+<ng-template #modal_alias let-c="close " let-d="dismiss">
     <div class="modal-header">
         <h4 class="modal-title text-fucsia " id="modal-basic-title "> <i class="fas fa-sign-out-alt "></i> Editar alias</h4>
         <button type="button " class="close " (click)="d( 'Cross click') "><span >×</span></button>
@@ -413,13 +391,13 @@
             <p class="text-justify"></p>
             <div class="form-group ">
                 <label for=" ">Tu contraseña:</label>
-                <input autocomplete="new-password" ngbAutofocus formControlName="contraseña" type="password" class="form-control " maxlength="60">
-                <label *ngIf="validateForms('contraseña',form_email).valid " class="text-danger"> {{validateForms('contraseña',form_email).error }} </label>
+                <input autocomplete="new-password" ngbAutofocus formControlName="password" type="password" class="form-control " maxlength="60">
+                <label *ngIf="validateForms('password',form_email).valid " class="text-danger"> {{validateForms('password',form_email).error }} </label>
             </div>
             <div class="form-group">
                 <label for=" ">Nuevo correo:</label>
-                <input ngbAutofocus formControlName="correo" type="text " class="form-control " maxlength="60">
-                <label *ngIf="validateForms('correo',form_email).valid " class="text-danger"> {{validateForms('correo',form_email).error }} </label>
+                <input ngbAutofocus formControlName="email" type="text " class="form-control " maxlength="60">
+                <label *ngIf="validateForms('email',form_email).valid " class="text-danger"> {{validateForms('email',form_email).error }} </label>
             </div>
         </div>
 
@@ -443,7 +421,7 @@
             </h6>
             <p class="text-justify">Se ha enviado un código de confirmación al correo: " <span class="text-fucsia-l">{{newEmail}}</span> ", ingresa el código en el siguiente campo para confirmar el cambio.</p>
 
-            <div class="form-group">
+            <div class="form-group text-center">
                 <label for="" class="text-center">Código</label>
                 <input type="text" class="form-control m-auto" formControlName="code" placeholder="XXXXXXXX" maxlength="8" style="max-width: 125px;">
             </div>
@@ -631,9 +609,9 @@ identification_owner -->
                     <label *ngIf="validateForms('identification_owner',form_bank).valid " class="text-danger"> {{validateForms('identification_owner',form_bank).error }} </label>
                 </div>
 
-                <div class="form-group col-12">
+                <div class="form-group col-12 text-left">
                     <label for=" ">Número de cuenta:</label>
-                    <input type="number" class="form-control" formControlName="number">
+                    <input type="text" class="form-control" formControlName="number" maxlength="60">
                     <label *ngIf="validateForms('number',form_bank).valid " class="text-danger"> {{validateForms('number',form_bank).error }} </label>
                 </div>
             </div>
@@ -718,5 +696,22 @@ identification_owner -->
             </div>
         </div>
     </form>
+
+</ng-template>
+
+<!-- MODAL LOGIN -->
+<ng-template #modal_delete_bank let-c="close " let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title text-fucsia " id="modal-basic-title "> <i class="fas fa-sign-out-alt "></i> Eliminar cuenta de banco</h4>
+        <button type="button " class="close " (click)="d( 'Cross click') "><span >×</span></button>
+    </div>
+
+    <div class="modal-body">
+        <h5 class="text-danger my-2"> ¿Está seguro de eliminar esta cuenta de banco? </h5>
+    </div>
+    <div class="modal-footer">
+        <a type="button" class="btn btn-white " (click)="c('cancel') "><i class="fas fa-times "></i> Cancelar</a>
+        <button (click)="c('acept')" type=" submit " class="btn btn-danger "> <i class="fas fa-check "></i> Aceptar</button>
+    </div>
 
 </ng-template>

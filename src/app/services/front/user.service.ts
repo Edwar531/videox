@@ -28,8 +28,8 @@ export class UserService {
   url_get_states = "get-states";
   url_get_cities = "get-cities";
   urlUpdatePaypal = "update-paypal";
-  urlAddBank = "add-bank";
-  urlUpdateBank = "add-update-bank";
+  urlUpdateBank = "update-bank";
+  urlDeleteBank = "delete-bank";
 
   constructor(
     private http:HttpClient
@@ -111,7 +111,10 @@ export class UserService {
   }
 
   add_bank(data){
-    return this.http.post(this.ENDPOINT + this.urlAddBank,data);
+    return this.http.post(this.ENDPOINT + this.urlUpdateBank,data);
   }
 
+  delete_bank(id:number){
+    return this.http.post(this.ENDPOINT + this.urlDeleteBank,{id:id});
+  }
 }

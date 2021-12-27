@@ -35,12 +35,12 @@ export class MyAccountComponent implements OnInit {
   form_email: FormGroup;
   form_email_confirm: FormGroup;
   form_password: FormGroup;
-  form_document:FormGroup;
+  form_document: FormGroup;
   form_contact: FormGroup;
   form_data_personal: FormGroup;
   form_paypal: FormGroup;
   form_bank: FormGroup;
-  edit_bank:any = "";
+  edit_bank: any = "";
   newEmail: string;
   emailStep: any;
   whatsapp: any;
@@ -57,7 +57,7 @@ export class MyAccountComponent implements OnInit {
   // 	phone: new FormControl(undefined, [Validators.required])
   // });
   selectedCar: number;
-
+  delete_bank_id:number;
   cars = [
     { id: 1, name: 'Volvo' },
     { id: 2, name: 'Saab' },
@@ -74,6 +74,8 @@ export class MyAccountComponent implements OnInit {
   @ViewChild('modal_document') modal_document: any;
   @ViewChild('modal_paypal') modal_paypal: any;
   @ViewChild('modal_bank') modal_bank: any;
+  @ViewChild('modal_delete_bank') modal_delete_bank: any;
+
   @ViewChild('selectPais') selectPais: any;
   @ViewChild('selectState') selectState: any;
   @ViewChild('selectCity') selectCity: any;
@@ -244,7 +246,7 @@ export class MyAccountComponent implements OnInit {
   createFormEmail() {
     this.form_email = this.formBuilder.group({
       id: [this.user.id, [Validators.required]],
-      contraseña: ["", [Validators.required, Validators.minLength(8)]],
+      password: ["", [Validators.required, Validators.minLength(8)]],
       email: ["", [Validators.required, Validators.email]],
     })
   }
@@ -391,26 +393,26 @@ export class MyAccountComponent implements OnInit {
 
   // DOCUMENTS
 
-  show_modal_documents(){
+  show_modal_documents() {
 
 
     this.create_form_document();
-    this.modalS.open( this.modal_document , { centered: true, backdrop: 'static', size: 'lg', keyboard: false }).result.then((result) => {
+    this.modalS.open(this.modal_document, { centered: true, backdrop: 'static', size: 'lg', keyboard: false }).result.then((result) => {
 
     }).catch((err) => {
 
     });
   }
 
-  create_form_document(){
+  create_form_document() {
     this.form_document = this.formBuilder.group({
-      document_type: [this.user.document_type, [Validators.required ]],
+      document_type: [this.user.document_type, [Validators.required]],
       document_number: [this.user.document_number, [Validators.required]],
       nationality: [this.user.nationality, [Validators.required]],
     })
   }
 
-  update_document_data(){
+  update_document_data() {
 
     this.sending = true;
     if (this.form_document.status == 'INVALID') {
@@ -434,22 +436,22 @@ export class MyAccountComponent implements OnInit {
   //PAYMENT METHOD
   //PAYPAL
 
-  show_modal_paypal(){
+  show_modal_paypal() {
     this.create_form_paypal();
-    this.modalS.open( this.modal_paypal , { centered: true, backdrop: 'static', size: 'sm', keyboard: false }).result.then((result) => {
+    this.modalS.open(this.modal_paypal, { centered: true, backdrop: 'static', size: 'sm', keyboard: false }).result.then((result) => {
 
     }).catch((err) => {
 
     });
   }
 
-  create_form_paypal(){
+  create_form_paypal() {
     this.form_paypal = this.formBuilder.group({
       paypal: [this.user.paypal, [this.validatorsS.email]],
     })
   }
 
-  update_paypal(){
+  update_paypal() {
 
     this.sending = true;
     if (this.form_paypal.status == 'INVALID') {
@@ -470,43 +472,40 @@ export class MyAccountComponent implements OnInit {
   }
 
   // BANKS
-  show_modal_bank(edit="", edit_bank_select=""){
-    this.sending = true;
-    this.userS.getDataContact().subscribe((data: any) => {
-    this.sending = false;
-
+  show_modal_bank(edit = "", edit_bank_select = "") {
+      this.sending = true;
+      this.userS.getDataContact().subscribe((data: any) => {
+      this.sending = false;
       this.countries = data.countries;
 
-      if(edit == "edit"){
+      if (edit == "edit") {
         this.edit_bank = edit_bank_select;
-      }else{
-        this.edit_bank = {country:"",country_id:this.user.country_id,name_bank:"",number:"",type:"",owner:"",identification_owner:""};
+      } else {
+        this.edit_bank = { country: "", country_id: this.user.country_id, name_bank: "", number: "", type: "", owner: "", identification_owner: "" };
       }
 
       this.create_form_bank();
-      this.modalS.open( this.modal_bank, { centered: true, backdrop: 'static', size: 'lg', keyboard: false }).result.then((result) => {
+      this.modalS.open(this.modal_bank, { centered: true, backdrop: 'static', size: 'lg', keyboard: false }).result.then((result) => {
 
       }).catch((err) => {
 
       });
     });
-
-
   }
 
-  create_form_bank(){
-      this.form_bank = this.formBuilder.group({
-        id:[this.edit_bank.id],
-        country_id: [this.edit_bank.country_id, [Validators.required]],
-        name_bank: [this.edit_bank.name_bank, [Validators.required,Validators.max(60)]],
-        number: [this.edit_bank.number, [Validators.required,Validators.max(999999999999999999999999999999999999999999999999999999999999)]],
-        type: [this.edit_bank.type, [Validators.required]],
-        owner: [this.edit_bank.owner, [Validators.required,Validators.max(60)]],
-        identification_owner: [this.edit_bank.identification_owner, [Validators.required,Validators.max(999999999999999)]],
-      })
+  create_form_bank() {
+    this.form_bank = this.formBuilder.group({
+      id: [this.edit_bank.id],
+      country_id: [this.edit_bank.country_id, [Validators.required]],
+      name_bank: [this.edit_bank.name_bank, [Validators.required, Validators.max(60)]],
+      number: [this.edit_bank.number, [Validators.required,Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.max(999999999999999999999999999999999999999999999999999999999999)]],
+      type: [this.edit_bank.type, [Validators.required]],
+      owner: [this.edit_bank.owner, [Validators.required, Validators.max(60)]],
+      identification_owner: [this.edit_bank.identification_owner, [Validators.required, Validators.max(999999999999999)]],
+    })
   }
 
-  update_bank(){
+  update_bank() {
     this.sending = true;
     if (this.form_bank.status == 'INVALID') {
       this.form_bank.markAllAsTouched();
@@ -516,6 +515,8 @@ export class MyAccountComponent implements OnInit {
 
     this.userS.update_bank(this.form_bank.value).subscribe((resp: any) => {
       this.interpretResp.success(resp, this.form_bank);
+      console.log(resp);
+
       if (resp.result == "ok") {
         this.user.banks = resp.banks;
         this.modalS.dismissAll();
@@ -524,6 +525,27 @@ export class MyAccountComponent implements OnInit {
       this.sending = false;
     });
 
+  }
+
+  show_modal_delete_bank(id){
+    this.delete_bank_id = id;
+    this.modalS.open(this.modal_delete_bank, { centered: true, backdrop: 'static', size: 'lg', keyboard: false }).result.then((result) => {
+      console.log(result);
+      if(result == "acept"){
+        this.userS.delete_bank(this.delete_bank_id).subscribe((resp: any) => {
+          this.interpretResp.success(resp, this.form_bank);
+
+          if (resp.result == "ok") {
+            this.user.banks = resp.banks;
+            this.modalS.dismissAll();
+            // this.phone = JSON.parse(this.phone);
+          }
+          this.sending = false;
+        });
+      }
+    }).catch((err) => {
+
+    });
   }
 
   // CONTACTO
@@ -539,7 +561,6 @@ export class MyAccountComponent implements OnInit {
       this.states = data.states;
       this.form_contact.controls.statesCount.setValue(data.states.length);
       this.form_contact.controls.citiesCount.setValue(0);
-
       this.cities = [];
 
       if (this.selectState != undefined) {

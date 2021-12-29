@@ -1,0 +1,183 @@
+<div class="container mt-5">
+    <h5> Antes de continuar por favor rellene los siguientes campos (algunos obligatorios) </h5>
+    <p>Estos datos solo debera agregarlos una sola vez.</p>
+    <div class="steps form-inline">
+        <h3 class="mr-2">Secciones:</h3>
+        <div class="circle" [ngClass]="{'active':step == 1}">
+            <div>1</div>
+        </div>
+        <div class="circle" [ngClass]="{'active':step == 2}">
+            <div>2</div>
+        </div>
+        <div class="circle" [ngClass]="{'active':step == 3}">
+            <div>3</div>
+        </div>
+        <div class="circle" [ngClass]="{'active':step == 4}">
+            <div>4</div>
+        </div>
+    </div>
+    <br>
+    <div class="card" *ngIf="step == 1">
+        <div class="card-header">
+            <h4 class="m-0">Datos personales</h4>
+        </div>
+
+        <form [formGroup]="form_data_personal" *ngIf="form_data_personal" (ngSubmit)="update_data_personal()">
+            <div class="card-body">
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label for=" ">Nombres:</label>
+                        <input maxlength="30" ngbAutofocus formControlName="name" type="text" class="form-control ">
+                        <label *ngIf="validateForms('name',form_data_personal).valid " class="text-danger"> {{validateForms('name',form_data_personal).error }} </label>
+                    </div>
+                    <div class="form-group col-4">
+                        <label for=" ">Apellidos:</label>
+                        <input maxlength="30" ngbAutofocus formControlName="last_name" type="text" class="form-control">
+                        <label *ngIf="validateForms('last_name',form_data_personal).valid " class="text-danger"> {{validateForms('last_name',form_data_personal).error }} </label>
+                    </div>
+                    <div class="form-group col-4">
+                        <label for=" ">Fecha de Nacimiento:</label>
+                        <input min="{{dateNowSub100}}" max="{{dateNow}}" ngbAutofocus formControlName="date_of_birth" type="date" class="form-control">
+                        <label *ngIf="validateForms('date_of_birth',form_data_personal).valid " class="text-danger"> {{validateForms('date_of_birth',form_data_personal).error }} </label>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary float-right ml-2"> <i class="fas fa-arrow-right"></i> Siguiente </button>
+                        <a routerLink="/" type="button" class="btn btn-white float-right"><i class="fas fa-times"></i> Cancelar</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="card" *ngIf="step == 2">
+        <div class="card-header">
+            <h4 class="m-0">Identificación</h4>
+        </div>
+        <form [formGroup]="form_document" *ngIf="form_document" (ngSubmit)="update_document_data()">
+            <div class="card-body">
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label for=" ">Tipo de documento:</label>
+                        <select formControlName="document_type" ngbAutofocus name="" id="" class="form-control">
+                          <option value="D.N.I.">D.N.I.</option>
+                          <option value="Licencia de conducir">Licencia de conducir</option>
+                          <option value="Pasaporte">Pasaporte</option>
+                          <option value="Visa o residencia permanente">Visa o residencia permanente</option>
+                        </select>
+                        <label *ngIf="validateForms('document_type',form_document).valid " class="text-danger"> {{validateForms('document_type',form_document).error }} </label>
+                    </div>
+                    <div class="form-group col-4">
+                        <label for=" ">Número de documento:</label>
+                        <input type="number" min="0" max="99999999999999" ngbAutofocus formControlName="document_number" class="form-control">
+                        <label *ngIf="validateForms('document_number',form_document).valid " class="text-danger"> {{validateForms('document_number',form_document).error }} </label>
+                    </div>
+                    <div class="form-group col-4">
+                        <label for=" ">Nacionalidad:</label>
+                        <select formControlName="nationality" ngbAutofocus name="" id="" class="form-control">
+                          <option value="Extranjera">Extranjera</option>
+                          <option value="Natural">Natural</option>
+                        </select>
+                        <label *ngIf="validateForms('nationality',form_document).valid " class="text-danger"> {{validateForms('nationality',form_document).error }} </label>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary float-right ml-2"> <i class="fas fa-arrow-right"></i> Siguiente </button>
+                        <a (click)="step = 1" type="button" class="btn btn-white float-right"><i class="fas fa-times"></i> Cancelar</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="card" *ngIf="step == 3">
+        <div class="card-header">
+            <h4 class="m-0">Contacto</h4>
+        </div>
+        <form [formGroup]="form_contact" *ngIf="form_contact && countries.length != 0" (ngSubmit)="save_data_contact()">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-4 form-group">
+
+                        <label for="">Whatsapp</label>
+                        <ngx-intl-tel-input maxlength="30" [cssClass]="'form-control'" [preferredCountries]="preferredCountries" [enableAutoCountrySelect]="true" [enablePlaceholder]="false" [searchCountryFlag]="true" [searchCountryField]="[SearchCountryField.Iso2,SearchCountryField.Name]"
+                            [selectFirstCountry]="false" [selectedCountryISO]="whatsapp?.countryCode?whatsapp.countryCode :CountryISO.Ecuador" maxLength="15" [phoneValidation]="true" [separateDialCode]="separateDialCode" [numberFormat]="PhoneNumberFormat.National"
+                            name="phone" formControlName="whatsapp">
+                        </ngx-intl-tel-input>
+                        <label *ngIf="validateForms('whatsapp',form_contact).valid " class="text-danger"> {{validateForms('whatsapp',form_contact).error }} </label>
+                    </div>
+                    <div class="col-4 form-group">
+                        <label for="">Teléfono opcional</label>
+                        <ngx-intl-tel-input maxlength="30" [cssClass]="'form-control'" [preferredCountries]="preferredCountries" [enableAutoCountrySelect]="true" [enablePlaceholder]="false" [searchCountryFlag]="true" [searchCountryField]="[
+              SearchCountryField.Iso2,
+              SearchCountryField.Name
+            ]" [selectFirstCountry]="false" [selectedCountryISO]="phone?.countryCode?phone.countryCode :CountryISO.Ecuador" maxLength="15" [phoneValidation]="true" [separateDialCode]="separateDialCode" [numberFormat]="PhoneNumberFormat.National" name="phone"
+                            formControlName="phone">
+                        </ngx-intl-tel-input>
+                        <label *ngIf="validateForms('phone',form_contact).valid " class="text-danger"> {{validateForms('phone',form_contact).error }} </label>
+                    </div>
+                    <div class="col-4 form-group" *ngIf="countries.length != 0">
+                        <label for=""> Pais <i class="fas fa-asterisk"></i> </label>
+                        <ng-select #selectPais (change)="getStates($event)" class="custom" notFoundText="No encontrado." [items]="countries" bindLabel="name" bindValue="id" formControlName="country_id">
+                        </ng-select>
+                        <label *ngIf="validateForms('country_id',form_contact).valid " class="text-danger"> {{validateForms('country_id',form_contact).error }} </label>
+                    </div>
+                    <div class="col-4 form-group" *ngIf="states.length != 0">
+                        <label for=""> Estado / Provincia <i class="fas fa-asterisk"></i> </label>
+                        <ng-select #selectState (change)="getCities($event)" class="custom" [items]="states" bindLabel="name" bindValue="id" notFoundText="No encontrado." #selectDropdown formControlName="state_id">
+                        </ng-select>
+                        <label *ngIf="validateForms('state_id',form_contact).valid " class="text-danger"> {{validateForms('state_id',form_contact).error }} </label>
+                        <label class="text-danger" *ngIf="form_contact.errors?.stateRequired">
+                          Este campo es requerido
+                        </label>
+                    </div>
+                    <div class="col-4 form-group" *ngIf="cities.length != 0">
+                        <label for=""> Ciudad <i class="fas fa-asterisk"></i> </label>
+                        <ng-select #selectCity class="custom" [items]="cities" bindLabel="name" bindValue="id" notFoundText="No encontrado." formControlName="city_id">
+                        </ng-select>
+                        <label *ngIf="validateForms('city_id',form_contact).valid " class="text-danger"> {{validateForms('city_id',form_contact).error }} </label>
+                        <label class="text-danger" *ngIf="form_contact.errors?.cityRequired">
+                          Este campo es requerido
+                        </label>
+                    </div>
+                    <div class="col-4 form-group">
+                        <label for=""> Municipio </label>
+                        <input maxlength="40" type="text" class="form-control" formControlName="municipality">
+                        <label *ngIf="validateForms('municipality',form_contact).valid " class="text-danger"> {{validateForms('municipality',form_contact).error }} </label>
+                    </div>
+                    <div class="col-12 form-group">
+                        <label for=""> Dirección </label>
+                        <input maxlength="255" type="text" class="form-control" formControlName="address">
+                        <label *ngIf="validateForms('address',form_contact).valid " class="text-danger"> {{validateForms('address',form_contact).error }} </label>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary float-right ml-1"> Guardar </button>
+                        <a type="button" class="btn btn-white"><i class="fas fa-times "></i> Cancelar</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="card" *ngIf="step == 4">
+        <div class="card-header">
+            <h4 class="m-0">Métodos de pago</h4>
+        </div>
+        <div class="card-body">
+
+        </div>
+        <div class="card-footer">
+
+        </div>
+    </div>
+</div>

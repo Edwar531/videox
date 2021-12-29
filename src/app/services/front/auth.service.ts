@@ -44,14 +44,8 @@ export class AuthService {
   }
 
   Authenticated(){
-    let auth = this.getAuth();
-    if(auth?.token){
-      return this.http.post(this.ENDPOINT + this.urlAuthenticated,"").subscribe( (resp:any) => {
 
-      });
-    }
-    return;
-
+    return this.http.post(this.ENDPOINT + this.urlAuthenticated,"")
   }
 
   getAuth() {

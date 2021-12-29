@@ -27,6 +27,7 @@
 }
 
 .navbar .section-logo {
+    padding-top: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -93,14 +94,15 @@
     /* position: fixed; */
     /* top: 55px; */
     margin-top: -5px;
+    margin-bottom: 5px;
     height: 40px;
     z-index: 18;
     width: 100%;
-    margin-bottom: 5px;
 }
 
 .container-navbars .navbar2 .tab {
     font-size: 16px !important;
+    padding-top: 12px;
 }
 
 .container-navbars .navbar2 .col-4 {

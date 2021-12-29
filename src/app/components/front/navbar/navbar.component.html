@@ -7,7 +7,6 @@
             <div class="zone-user">
                 <span *ngIf="!userAuth?.token" class="tab" (click)="showModalRegister()">Registrarse</span>
                 <span *ngIf="!userAuth?.token" class="tab " (click)="showModalLogin() ">Ingresar</span>
-
                 <div class="dropdown" *ngIf="userAuth?.token ">
                     <span class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                  <i class="fas fa-user"></i> {{userAuth.alias}}
@@ -16,7 +15,6 @@
                         <a class="dropdown-item" routerLink="/mi-cuenta">Mi cuenta</a>
                         <a class="dropdown-item" routerLink="/mis-compras/imagenes">Mis compras</a>
                         <a class="dropdown-item" routerLink="/mis-ventas/videos">Mis ventas</a>
-
                         <a (click)="logout() " class="dropdown-item " href="# ">  Cerrar sesión</a>
                     </div>
                 </div>
@@ -34,7 +32,8 @@
         <div class="navbar2">
             <div class="row">
                 <div class="col-4">
-                    <span class="tab" routerLink="/mis-ventas/videos">Publica tus videos</span>
+                    <span *ngIf="!authenticated" class="tab" (click)="only_with_login()">Pública tus videos</span>
+                    <span *ngIf="authenticated" class="tab" routerLink="/mis-ventas/videos/agregar-nuevo">Pública tus videos</span>
                 </div>
 
                 <div class="col-4">
@@ -57,7 +56,8 @@
                 </div>
 
                 <div class="col-4">
-                    <span class="tab" routerLink="/mis-ventas/galeria-de-fotos">Publica tus imágenes</span>
+                    <span *ngIf="!authenticated" class="tab" (click)="only_with_login()">Pública tus imágenes</span>
+                    <span *ngIf="authenticated" class="tab" routerLink="/mis-ventas/videos/agregar-nuevo">Pública tus imágenes</span>
                 </div>
             </div>
         </div>
@@ -66,14 +66,17 @@
 <div class="margin-navbar ">
 
 </div>
+
 <!-- MODAL Login -->
 <ng-template #modalLogin let-c="close " let-d="dismiss ">
     <div class="modal-header">
         <h4 class="modal-title text-white " id="modal-basic-title "> <i class="fas fa-sign-out-alt "></i> Iniciar Sesión</h4>
         <button type="button " class="close " (click)="d( 'Cross click') "><span >×</span></button>
+
     </div>
     <form [formGroup]="form" *ngIf="form" (ngSubmit)="login()">
         <div class="modal-body">
+            <p class="text-fucsia text-center" style="width: 100%;" *ngIf="only_with_login_text"> Para realizar esta acción debes inicar sesión. </p>
             <div class="form-group ">
 
                 <p *ngIf="accountConfirm == 'confirmed'" class="text-center text-fucsia" style="line-height: 1.2;"> <i class="fas fa-info-circle"></i> Su cuenta ha sido confirmada con éxito, ingrese sus credenciales para continuar.</p>
@@ -92,7 +95,7 @@
             <a type="button" class="btn btn-white " (click)="d( 'cancel') "><i class="fas fa-times "></i> Cancelar</a>
             <button type="submit" class="btn btn-primary "> <i class="fas fa-check "></i> Iniciar</button>
 
-            <p class="mr-auto mt-3">¿No tienes cuenta? <a class="link" (click)="hideMLShowMR()">Regístrate</a> </p>
+            <p class="mr-auto mt-3 ">¿No tienes cuenta? <a class="btn btn-primary btn-sm " (click)="hideMLShowMR()">Regístrate</a> </p>
         </div>
     </form>
 </ng-template>
@@ -143,11 +146,10 @@
         <div class="modal-footer">
             <a type="button" class="btn btn-white " (click)="d( 'cancel') "><i class="fas fa-times "></i> Cancelar</a>
             <button type="submit" class="btn btn-primary  "> <i class="fas fa-check "></i> Continuar</button>
-            <p style="width: 100%;" class="mr-auto mt-3">¿Ya estás registrado? <a class="link" (click)="hideMRShowML()">Ingresa</a> </p>
+            <p style="width: 100%;" class="mr-auto mt-3">¿Ya estás registrado? <a class="btn btn-sm btn-primary" (click)="hideMRShowML()">Ingresa</a> </p>
         </div>
     </form>
 </ng-template>
-
 
 <div class="loader-g " *ngIf="sending ">
     <div class="lds-ripple ">

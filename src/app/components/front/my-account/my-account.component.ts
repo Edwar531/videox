@@ -47,6 +47,7 @@ export class MyAccountComponent implements OnInit {
   phone: any;
   dateNowSub100: any;
   dateNow: any;
+  imagen_de_perfil:any;
   // number input
   separateDialCode = false;
   SearchCountryField = SearchCountryField;
@@ -58,12 +59,6 @@ export class MyAccountComponent implements OnInit {
   // });
   selectedCar: number;
   delete_bank_id:number;
-  cars = [
-    { id: 1, name: 'Volvo' },
-    { id: 2, name: 'Saab' },
-    { id: 3, name: 'Opel' },
-    { id: 4, name: 'Audi' },
-  ];
 
   @ViewChild('modal_alias') modal_alias: any;
   @ViewChild('modal_delete_img') modal_delete_img: any;
@@ -75,7 +70,6 @@ export class MyAccountComponent implements OnInit {
   @ViewChild('modal_paypal') modal_paypal: any;
   @ViewChild('modal_bank') modal_bank: any;
   @ViewChild('modal_delete_bank') modal_delete_bank: any;
-
   @ViewChild('selectPais') selectPais: any;
   @ViewChild('selectState') selectState: any;
   @ViewChild('selectCity') selectCity: any;
@@ -90,7 +84,6 @@ export class MyAccountComponent implements OnInit {
     private interpretResp: InterpretFormRespService,
     private validatorsS: ValidatorsService,
     private toastrS: ToastrService,
-
 
   ) { }
 
@@ -118,6 +111,7 @@ export class MyAccountComponent implements OnInit {
       this.sending = false;
     });
   }
+
   // Change Image
   changeImage(event) {
     console.log(event.target.files[0]);
@@ -127,8 +121,8 @@ export class MyAccountComponent implements OnInit {
   upload(idx: number, file: any) {
     this.sending = true;
     this.cardUpload = true;
-
-    let regex = new RegExp("(.*?)\.(jpeg|png|jpg|gif|svg|webp)$"); //add or remove required extensions here
+    
+    let regex = new RegExp("(.*?)\.(jpeg|png|jpg|gif|svg|webp|tif|bmp|ico|psd)$"); //add or remove required extensions here
     let regexTest = regex.test(file.name);
     // verficar q sea imagen
     if (!regexTest) {
@@ -153,7 +147,7 @@ export class MyAccountComponent implements OnInit {
           } else if (event.body.result == "ok") {
             this.progressInfo.completed = true;
             this.sending = false;
-            this.user.imagen_de_perfil = event.body.location;
+            this.imagen_de_perfil = event.body.location;
             this.cardUpload = false;
           }
         }
@@ -206,7 +200,7 @@ export class MyAccountComponent implements OnInit {
       this.interpretResp.success(resp, this.formAlias);
       console.log(resp);
       if (resp.result == "ok") {
-        this.user.imagen_de_perfil = "";
+        this.imagen_de_perfil = "";
         this.modalS.dismissAll();
       } else {
         console.log(resp);
@@ -481,7 +475,7 @@ export class MyAccountComponent implements OnInit {
       if (edit == "edit") {
         this.edit_bank = edit_bank_select;
       } else {
-        this.edit_bank = { country: "", country_id: this.user.country_id, name_bank: "", number: "", type: "", owner: "", identification_owner: "" };
+        this.edit_bank = { country: "", country_id: this.user.country_id, name_bank: "", number: "", type: "", owner: this.user.name+" "+this.user.last_name, identification_owner: "" };
       }
 
       this.create_form_bank();

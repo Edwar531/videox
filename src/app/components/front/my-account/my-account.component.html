@@ -47,9 +47,9 @@
                 <div class="text-center mr-4">
                     <p class="mb-2 text-fucsia-l">Foto de perfil</p>
                     <div class="container-buttons-img relative">
-                        <button *ngIf="user.imagen_de_perfil" (click)="showModalDeleteImg()" type="button" class="btn btn-white btn-sm btn-delete-img px-2 py-1"> <i class="fas fa-times text-danger"></i> </button>
-                        <div class="container-img-circle"><img *ngIf="user.imagen_de_perfil" class="" [src]="user.imagen_de_perfil" alt="">
-                            <img *ngIf="!user.imagen_de_perfil" class="" src="assets/img/default/user-default.png" alt="">
+                        <button *ngIf="imagen_de_perfil" (click)="showModalDeleteImg()" type="button" class="btn btn-white btn-sm btn-delete-img px-2 py-1"> <i class="fas fa-times text-danger"></i> </button>
+                        <div class="container-img-circle"><img *ngIf="imagen_de_perfil" class="" [src]="imagen_de_perfil" alt="">
+                            <img *ngIf="!imagen_de_perfil" class="" src="assets/img/default/user-default.png" alt="">
                             <div class="btn-change">
                                 <div>
                                     <label class="btn btn-sm btn-primary px-2 py-1 mt-5"> Cambiar  <input class="hide" (change)="changeImage($event)"  type="file"/>  </label>

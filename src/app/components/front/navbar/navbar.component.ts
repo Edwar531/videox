@@ -26,6 +26,9 @@ export class NavbarComponent implements OnInit {
   accountConfirm = "";
   typeSearch: string;
   url: any;
+  only_with_login_text = false;
+  authenticated:any;
+  
   constructor(
     private activatedR: ActivatedRoute,
     private formBuilder: FormBuilder,
@@ -35,12 +38,24 @@ export class NavbarComponent implements OnInit {
     private authS: AuthService,
     private router: Router,
     private location: Location,
-
   ) { }
 
   ngOnInit(): void {
+      
+    let auth = this.authS.getAuth();
 
-    // this.authS.Authenticated();
+    if(auth?.token != null){
+      // "(Esto esta funcional: se ejecuta desde el navbar, si no ubica token, no se ejecuta, si ahi token envia petición, si la petición falla, desde el interceptor desloguea, esto para evitar que en rutas que no sea necesario loguearse, no salga el usario vencido.)"
+      this.authS.Authenticated().subscribe( (resp:any) => {
+        if(resp.result == "ok"){
+          this.authenticated = true;
+        }else{
+          this.authenticated = false;
+        }
+      });
+    }else{
+      this.authenticated = false;
+    }
 
     this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationStart) {
@@ -167,11 +182,13 @@ export class NavbarComponent implements OnInit {
   }
 
   showModalLogin() {
+    this.only_with_login_text = false;
     this.form.reset();
     this.modalS.open(this.modalLogin, { centered: true, backdrop: 'static', size: 'sm', keyboard: false }).result.then((result) => {
       return;
     });
   }
+
   // registro
   showModalRegister() {
     this.formR.reset();
@@ -264,5 +281,9 @@ export class NavbarComponent implements OnInit {
     }
     return { 'valid': false, 'error': '' };
   }
-
+  
+  only_with_login(){
+    this.showModalLogin();
+    this.only_with_login_text = true;
+  }
 }

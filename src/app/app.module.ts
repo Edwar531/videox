@@ -27,6 +27,7 @@ import { VideosComponent } from './components/front/videos/videos.component';
 import { GallerryComponent } from './components/front/gallerry/gallerry.component';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { CompleteDataComponent } from './components/front/complete-data/complete-data.component';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     WatchVideoComponent,
     VideosComponent,
     GallerryComponent,
+    CompleteDataComponent,
   ],
   imports: [
     BrowserModule,

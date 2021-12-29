@@ -1,0 +1,33 @@
+/* steps */
+
+.steps {
+    padding: 5px 0 5px 0;
+}
+
+.steps .circle {
+    background: var(--f-l);
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    border: 2px white solid;
+    /* padding-top: 8px; */
+    margin-right: 10px;
+    font-size: 24px;
+    font-family: 'Karla-Medium';
+    color: var(--f);
+    text-shadow: 1px 1px 1px grey;
+}
+
+.steps .circle.active {
+    background: var(--f);
+    color: white;
+}
+
+.fa-asterisk {
+    font-size: 12px;
+    color: rgb(255, 147, 45);
+    /* text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.473), -1px -1px 2px rgba(255, 255, 255, 0.479); */
+}

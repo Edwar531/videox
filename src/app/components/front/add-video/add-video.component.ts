@@ -6,7 +6,7 @@ import { InterpretFormRespService } from 'src/app/services/interpret-form-resp.s
 import { VideoService } from '../../../services/front/video.service';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/front/auth.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { ValidationsMessagePipe } from 'src/app/pipes/validations-message.pipe';
 import * as AWS from 'node_modules/aws-sdk/global';
@@ -62,7 +62,9 @@ export class AddVideoComponent implements OnInit {
     private location: Location,
     private validationsM: ValidationsMessagePipe,
     private InterpretResp: InterpretFormRespService,
-    private toastrS: ToastrService
+    private toastrS: ToastrService,
+    private router: Router
+
 
   ) { }
 
@@ -83,22 +85,29 @@ export class AddVideoComponent implements OnInit {
       user_id = this.userAuth.id;
     }
     this.videoS.new(user_id).subscribe((data: any) => {
-      this.video = data.video;
-      this.tags = data.tags;
-      this.createForm();
+      if(data.result == "redirect"){
+        this.router.navigateByUrl("/completar-datos");
+      }else{
+        this.video = data.video;
+        this.tags = data.tags;
+        this.createForm();
+      }
+     
     });
   }
 
   editVideo() {
     this.videoS.edit(this.idEdit).subscribe((data: any) => {
-      this.video = data.video;
-      this.uploaded_video = true;
-      this.vista_previa_64 = this.video.vista_previa;
-      this.tags = data.tags;
-      this.selected_tags = data.selected_tags;
-      console.log( );
-
-      this.createForm();
+      if(data.result == "redirect"){
+        this.router.navigateByUrl("/completar-datos");
+      }else{
+        this.video = data.video;
+        this.uploaded_video = true;
+        this.vista_previa_64 = this.video.vista_previa;
+        this.tags = data.tags;
+        this.selected_tags = data.selected_tags;
+        this.createForm();
+      }
     });
   }
 

@@ -76,7 +76,6 @@ export class AddVideoComponent implements OnInit {
     } else {
       this.newVideo();
     }
-
   }
 
   newVideo() {
@@ -85,7 +84,10 @@ export class AddVideoComponent implements OnInit {
       user_id = this.userAuth.id;
     }
     this.videoS.new(user_id).subscribe((data: any) => {
+      console.log(data.result);
+      
       if(data.result == "redirect"){
+        localStorage.setItem('redirect-complete-data', "/mis-ventas/videos/agregar-nuevo");
         this.router.navigateByUrl("/completar-datos");
       }else{
         this.video = data.video;

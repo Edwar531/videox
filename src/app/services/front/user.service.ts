@@ -30,6 +30,7 @@ export class UserService {
   urlUpdatePaypal = "update-paypal";
   urlUpdateBank = "update-bank";
   urlDeleteBank = "delete-bank";
+  urlCheckCompleteData = "check-completed-data";
 
   constructor(
     private http:HttpClient
@@ -116,5 +117,9 @@ export class UserService {
 
   delete_bank(id:number){
     return this.http.post(this.ENDPOINT + this.urlDeleteBank,{id:id});
+  }
+
+  check_completed_data(){
+    return this.http.post(this.ENDPOINT + this.urlCheckCompleteData,"");
   }
 }

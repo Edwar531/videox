@@ -28,7 +28,8 @@ import { GallerryComponent } from './components/front/gallerry/gallerry.componen
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { CompleteDataComponent } from './components/front/complete-data/complete-data.component';
-
+import { PhotoGalleryModule } from '@twogate/ngx-photo-gallery';
+import { WatchGalleryComponent } from './components/front/watch-gallery/watch-gallery.component'
 
 @NgModule({
   declarations: [
@@ -45,6 +46,8 @@ import { CompleteDataComponent } from './components/front/complete-data/complete
     VideosComponent,
     GallerryComponent,
     CompleteDataComponent,
+    WatchGalleryComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,13 @@ import { CompleteDataComponent } from './components/front/complete-data/complete
     BrowserAnimationsModule,
     NgMultiSelectDropDownModule.forRoot(),
     NgxIntlTelInputModule,
-    NgSelectModule
+    NgSelectModule,
+    PhotoGalleryModule,PhotoGalleryModule.forRoot({
+      defaultOptions: {
+        arrowEl: true,
+        indexIndicatorSep: '-'
+      }
+    })
   ],
   providers: [
     ValidationsMessagePipe,

@@ -11,6 +11,7 @@ import { WatchVideoComponent } from './components/front/watch-video/watch-video.
 import { VideosComponent } from './components/front/videos/videos.component';
 import { GallerryComponent } from './components/front/gallerry/gallerry.component';
 import { CompleteDataComponent } from './components/front/complete-data/complete-data.component';
+import { WatchGalleryComponent } from './components/front/watch-gallery/watch-gallery.component';
 
 
 const routes: Routes = [
@@ -26,7 +27,9 @@ const routes: Routes = [
   { path: 'mis-ventas/galeria-de-fotos', pathMatch: 'full', component:MySalesImagesComponent },
   { path: 'mis-ventas/galeria-de-fotos/agregar-galeria', pathMatch: 'full', component:AddGalleryComponent },
   { path: 'mis-ventas/galeria-de-fotos/editar-galeria/:id', pathMatch: 'full', component:AddGalleryComponent },
-  { path: 'ver-video/:id', pathMatch: 'full', component:WatchVideoComponent },
+  { path: 'ver-video/:slug', pathMatch: 'full', component:WatchVideoComponent },
+  { path: 'ver-galeria/:id', pathMatch: 'full', component:WatchGalleryComponent },
+
   { path: '**', pathMatch: 'full', redirectTo: '' }
 ];
 

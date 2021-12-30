@@ -21,6 +21,7 @@
     "@angular/router": "~12.2.0",
     "@ng-bootstrap/ng-bootstrap": "^10.0.0",
     "@ng-select/ng-select": "^8.1.1",
+    "@twogate/ngx-photo-gallery": "^1.1.0",
     "aws-sdk": "^2.1043.0",
     "bootstrap": "^4.5.0",
     "google-libphonenumber": "^3.2.25",

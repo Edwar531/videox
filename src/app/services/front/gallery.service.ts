@@ -21,6 +21,7 @@ export class GalleryService {
   urlUpdateImage = 'update-image';
   urlDeleteImage = 'delete-image';
   urlImagesGallery = 'images-gallery';
+  url_get_gallery = 'url-get-gallery';
   constructor(private http:HttpClient) {
 
   }
@@ -67,9 +68,12 @@ export class GalleryService {
   }
 
   galleries(limit="",search:any){
-
-
     return this.http.get(this.ENDPOINT + this.urlGalleries+"?search="+search+"&limit="+limit);
   }
+  
+  getGallery(slug:string){
+    return this.http.post(this.ENDPOINT + this.url_get_gallery,{slug:slug});
+  }
+
 
 }

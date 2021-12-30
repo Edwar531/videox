@@ -542,86 +542,9 @@
     </form>
 </ng-template>
 
-<!-- MODAL PAYPAL -->
-<ng-template #modal_paypal let-c="close " let-d="dismiss">
-    <div class="modal-header">
-        <h4 class="modal-title text-fucsia " id="modal-basic-title "> Editar Paypal</h4>
-    </div>
-    <form [formGroup]="form_paypal" *ngIf="form_paypal" (ngSubmit)="update_paypal()">
-        <div class="modal-body">
-            <div class="form-group">
-                <label for=" ">Paypal:</label>
-                <input type="email" max="60" ngbAutofocus formControlName="paypal" class="form-control">
-                <label *ngIf="validateForms('paypal',form_paypal).valid " class="text-danger"> {{validateForms('paypal',form_paypal).error }} </label>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <a type="button" class="btn btn-white " (click)="c('cancel') "><i class="fas fa-times "></i> Cancelar</a>
-            <button type="submit" class="btn btn-primary "> <i class="fas fa-check "></i> Guardar </button>
-        </div>
-    </form>
-</ng-template>
 
-<!-- MODAL BANK -->
-<ng-template #modal_bank let-c="close " let-d="dismiss">
-    <div class="modal-header">
-        <h4 class="modal-title text-fucsia " id="modal-basic-title "> <span *ngIf="edit_bank?.name_bank">Editar</span> <span *ngIf="!edit_bank?.name_bank">Agregar </span> cuenta bancaria</h4>
-    </div>
-    <form [formGroup]="form_bank" *ngIf="form_bank" (ngSubmit)="update_bank()">
-        <div class="modal-body">
 
-            <!--
 
-type
-owner
-identification_owner -->
-            <div class="row">
-                <div class="form-group col-4">
-                    <label for=" ">Pais:</label>
-                    <ng-select class="custom" notFoundText="No encontrado." [items]="countries" bindLabel="name" bindValue="id" formControlName="country_id">
-                    </ng-select>
-
-                    <label *ngIf="validateForms('country_id',form_bank).valid " class="text-danger"> {{validateForms('country_id',form_bank).error }} </label>
-                </div>
-                <div class="form-group col-4">
-                    <label for=" ">Nombre del banco:</label>
-                    <input type="text" class="form-control" maxlength="60" formControlName="name_bank">
-                    <label *ngIf="validateForms('name_bank',form_bank).valid " class="text-danger"> {{validateForms('name_bank',form_bank).error }} </label>
-                </div>
-                <div class="form-group col-4">
-                    <label for=" ">Tipo de cuenta:</label>
-
-                    <select name="" id="" class="form-control" formControlName="type">
-                        <option value="Ahorro">Ahorro</option>
-                        <option value="Corriente">Corriente</option>
-                      </select>
-                    <label *ngIf="validateForms('type',form_bank).valid " class="text-danger"> {{validateForms('type',form_bank).error }} </label>
-                </div>
-                <div class="form-group col-4">
-                    <label for=" ">Propietario:</label>
-                    <input type="text" class="form-control" maxlength="60" formControlName="owner">
-                    <label *ngIf="validateForms('owner',form_bank).valid " class="text-danger"> {{validateForms('owner',form_bank).error }} </label>
-
-                </div>
-                <div class="form-group col-4">
-                    <label for=" ">Identificación propietario:</label>
-                    <input type="number" class="form-control" formControlName="identification_owner">
-                    <label *ngIf="validateForms('identification_owner',form_bank).valid " class="text-danger"> {{validateForms('identification_owner',form_bank).error }} </label>
-                </div>
-
-                <div class="form-group col-12 text-left">
-                    <label for=" ">Número de cuenta:</label>
-                    <input type="text" class="form-control" formControlName="number" maxlength="60">
-                    <label *ngIf="validateForms('number',form_bank).valid " class="text-danger"> {{validateForms('number',form_bank).error }} </label>
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <a type="button" class="btn btn-white " (click)="c('cancel') "><i class="fas fa-times "></i> Cancelar</a>
-            <button type="submit" class="btn btn-primary "> <i class="fas fa-check "></i> Guardar </button>
-        </div>
-    </form>
-</ng-template>
 
 <!-- MODAL CONTACTO -->
 <ng-template #modal_contact let-c="close " let-d="dismiss">
@@ -633,7 +556,7 @@ identification_owner -->
         <div class="modal-body">
             <div class="row">
                 <div class="col-4 form-group">
-                    {{CountryISO.Ecuador}}
+
                     <label for="">Whatsapp</label>
                     <ngx-intl-tel-input maxlength="30" [cssClass]="'form-control'" [preferredCountries]="preferredCountries" [enableAutoCountrySelect]="true" [enablePlaceholder]="false" [searchCountryFlag]="true" [searchCountryField]="[SearchCountryField.Iso2,SearchCountryField.Name]"
                         [selectFirstCountry]="false" [selectedCountryISO]="whatsapp?.countryCode?whatsapp.countryCode :CountryISO.Ecuador" maxLength="15" [phoneValidation]="true" [separateDialCode]="separateDialCode" [numberFormat]="PhoneNumberFormat.National"
@@ -699,7 +622,85 @@ identification_owner -->
 
 </ng-template>
 
-<!-- MODAL LOGIN -->
+
+<!-- MODAL PAYPAL -->
+<ng-template #modal_paypal let-c="close " let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title text-fucsia " id="modal-basic-title "> Editar Paypal</h4>
+    </div>
+    <form [formGroup]="form_paypal" *ngIf="form_paypal" (ngSubmit)="update_paypal()">
+        <div class="modal-body">
+            <div class="form-group">
+                <label for=" ">Paypal:</label>
+                <input type="email" max="60" ngbAutofocus formControlName="paypal" class="form-control">
+                <label *ngIf="validateForms('paypal',form_paypal).valid " class="text-danger"> {{validateForms('paypal',form_paypal).error }} </label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a type="button" class="btn btn-white " (click)="c('cancel') "><i class="fas fa-times "></i> Cancelar</a>
+            <button type="submit" class="btn btn-primary "> <i class="fas fa-arrow-right"></i> Siguiente </button>
+        </div>
+    </form>
+</ng-template>
+
+<!-- MODAL BANK -->
+<ng-template #modal_bank let-c="close " let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title text-fucsia " id="modal-basic-title "> <span *ngIf="edit_bank?.name_bank">Editar</span> <span *ngIf="!edit_bank?.name_bank">Agregar </span> cuenta bancaria</h4>
+    </div>
+    <form [formGroup]="form_bank" *ngIf="form_bank" (ngSubmit)="update_bank()">
+        <div class="modal-body">
+
+            <!-- type owner identification_owner -->
+            <div class="row">
+                <div class="form-group col-4">
+                    <label for=" ">Pais:</label>
+                    <ng-select class="custom" notFoundText="No encontrado." [items]="countries" bindLabel="name" bindValue="id" formControlName="country_id">
+                    </ng-select>
+
+                    <label *ngIf="validateForms('country_id',form_bank).valid " class="text-danger"> {{validateForms('country_id',form_bank).error }} </label>
+                </div>
+                <div class="form-group col-4">
+                    <label for=" ">Nombre del banco:</label>
+                    <input type="text" class="form-control" maxlength="60" formControlName="name_bank">
+                    <label *ngIf="validateForms('name_bank',form_bank).valid " class="text-danger"> {{validateForms('name_bank',form_bank).error }} </label>
+                </div>
+                <div class="form-group col-4">
+                    <label for=" ">Tipo de cuenta:</label>
+
+                    <select name="" id="" class="form-control" formControlName="type">
+                        <option value="Ahorro">Ahorro</option>
+                        <option value="Corriente">Corriente</option>
+                      </select>
+                    <label *ngIf="validateForms('type',form_bank).valid " class="text-danger"> {{validateForms('type',form_bank).error }} </label>
+                </div>
+                <div class="form-group col-4">
+                    <label for=" ">Propietario:</label>
+                    <input type="text" class="form-control" maxlength="60" formControlName="owner">
+                    <label *ngIf="validateForms('owner',form_bank).valid " class="text-danger"> {{validateForms('owner',form_bank).error }} </label>
+
+                </div>
+                <div class="form-group col-4">
+                    <label for=" ">Identificación propietario:</label>
+                    <input type="number" class="form-control" formControlName="identification_owner">
+                    <label *ngIf="validateForms('identification_owner',form_bank).valid " class="text-danger"> {{validateForms('identification_owner',form_bank).error }} </label>
+                </div>
+
+                <div class="form-group col-12 text-left">
+                    <label for=" ">Número de cuenta:</label>
+                    <input type="text" class="form-control" formControlName="number" maxlength="60">
+                    <label *ngIf="validateForms('number',form_bank).valid " class="text-danger"> {{validateForms('number',form_bank).error }} </label>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a type="button" class="btn btn-white " (click)="c('cancel') "><i class="fas fa-times "></i> Cancelar</a>
+            <button type="submit" class="btn btn-primary "> <i class="fas fa-check "></i> Guardar </button>
+        </div>
+    </form>
+</ng-template>
+
+<!-- MODAL DELETE -->
 <ng-template #modal_delete_bank let-c="close " let-d="dismiss">
     <div class="modal-header">
         <h4 class="modal-title text-fucsia " id="modal-basic-title "> <i class="fas fa-sign-out-alt "></i> Eliminar cuenta de banco</h4>
@@ -713,5 +714,4 @@ identification_owner -->
         <a type="button" class="btn btn-white " (click)="c('cancel') "><i class="fas fa-times "></i> Cancelar</a>
         <button (click)="c('acept')" type=" submit " class="btn btn-danger "> <i class="fas fa-check "></i> Aceptar</button>
     </div>
-
 </ng-template>

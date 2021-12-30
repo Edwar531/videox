@@ -37,6 +37,34 @@ export class InterpretFormRespService {
       this.toastr.warning("Hubo un error al hacer la petición al servidor, verifique su conexión de internet.")
     }
   }
+  
+  successNotMsgSuccess(resp: any, form: any) {
+    console.log(resp);
+
+    if (resp?.result == "ok" && resp?.message) {
+      if(resp.message != "no-message"){
+        // this.toastr.success(resp.message);
+      }
+    } else if (resp?.errors) {
+      let texterrors = '';
+      for (let campo in form.controls) {
+        if (resp.errors[campo]) {
+          texterrors = texterrors + '<div>' + resp.errors[campo] + '</div>';
+        }
+      }
+      this.toastr.warning('<div style="list-style: none;">' + texterrors + '</div>');
+    } else if (resp?.error) {
+      console.log("X!");
+
+      this.toastr.warning(resp.message)
+    } else if (resp?.result == 'error') {
+      console.log("X!2");
+
+      this.toastr.warning(resp.message)
+    } else {
+      this.toastr.warning("Hubo un error al hacer la petición al servidor, verifique su conexión de internet.")
+    }
+  }
 
   error(err, form) {
     if (err?.error && err.error?.errors) {
